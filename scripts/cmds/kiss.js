@@ -55,7 +55,7 @@ module.exports = {
             avatar1.resize(110, 110).circle();
             avatar2.resize(110, 110).circle();
             
-            background.composite(avatar1, 90, 130);  // প্রথম ইউজারের ইমেজ বসানো
+            background.composite(avatar1, 100, 130);  // প্রথম ইউজারের ইমেজ বসানো
             background.composite(avatar2, 250, 100);  // দ্বিতীয় ইউজারের ইমেজ বসানো
             
             // ফাইল সেভ করা
