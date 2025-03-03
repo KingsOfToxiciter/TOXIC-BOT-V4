@@ -192,16 +192,31 @@ module.exports.onStart = async ({ api, event, args }) => {
 module.exports.onChat = async ({ api, event, usersData }) => {
   const { threadID, messageID, body, senderID } = event;
   const userName = await usersData.getName(event.senderID);
+  const hasan = `✨ ${userName} 👀`;
   const cMessages = [
-    `♡︎${userName}✨\n\nকি হয়ছে বেবি দাকস কেন 🍆🙂`,
-    `♡︎${userName}✨\n\nহুম বল🐸`,
-    `♡︎${userName}✨\n\nAmi ekhane bby 🥹`,
-    `♡︎${userName}✨\n\nAmake vhule jaw 🤌😫`,
-    `♡︎${userName}✨\n\nEi ne amar rubbish boss er id => (https://www.facebook.com/Itz.HaSaN.00) amare arr disturb korbi nah jah`,
-    `♡︎${userName}✨\n\nki hoiche ki koibi ?🐐`,
-    `♡︎${userName}✨\n\nkire bukachuda dakhtechos killai etw🐐👈`,
-    `♡︎${userName}✨\n\nAmi shudhu hasan er bbu🤌😫`,
-    `♡︎${userName}✨\n\nI love you ummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmaaaaaaaaaaaaaaaaaaahhhhhhhhh🫦💋`
+    "কি হয়ছে বেবি দাকস কেন 🍆🙂",
+    "আমারে কেনো লাগবে তুর বল 🦆",
+    "Ami ekhane bby 🥹",
+    "Amake vhule jaw 🤌😫",
+    "Ei ne amar rubbish boss er id\n\n✨ https://www.facebook.com/Itz.HaSaN.00 🫰\n\namare arr disturb korbi nah jah 😑😒",
+    "ki hoiche ki koibi ?🐐",
+    "kire bukachuda dakhtechos killai etw🐐👈",
+    "Ami shudhu hasan er bbu🤌😫",
+    "I love you ummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmaaaaaaaaaaaaaaaaaaahhhhhhhhh🫦💋",
+    "Kire bolod, amare koitechos naki? 🐸",
+    "ei new jush khaw, bot bolte bolte hapai gecho 🧃",
+    "Amake vhule jao 🥺",
+    "Ami shudhu Hasan er. Don't disturb me! 🤦",
+    "bujhchi tui je Single na hole amare dakti na ekhon ki bolbi bol! 🙂🤌",
+    "ei mon tumake dilam 🦆💨",
+    "bujhchi tur kew nai amar motoi single 🫶💔",
+    "কিরে বলদ তুই এইখানে !?🍆",
+    "জানিস তুর আর আমার মিল কিসে ? ওইটা হচ্ছে তুই ও লুইচ্চা আর আমার কথা কি কমু!?🙂🚬",
+    "আমার বস হাসান রে ডাক ওই সিঙ্গেল আছে 🐸🫦",
+    "কি হইছে আমার কি কাজে লাগবে তুর !?🌚👀",
+    "তুই সেই লুইচ্চাটা না !? 🙂🔪",
+    "bby daktecho kno ummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmaaaaaaaaaaaaaaaaaaahhhhhhhhh 🫦💋\n\n🗣️Hasan🐸🔪",
+    "tui ki janosh tui ekhta bolod !? 🦆💨"
   ];
   const userInput = body.toLowerCase().trim();
 
@@ -233,7 +248,7 @@ module.exports.onChat = async ({ api, event, usersData }) => {
         return api.sendMessage("error🦆💨", threadID, messageID);
       }
     } else {
-      const rMsg = cMessages[Math.floor(Math.random() * cMessages.length)];
+      const rMsg = `${hasan}\n\n${cMessages[Math.floor(Math.random() * cMessages.length)]}`;
       return api.sendMessage(rMsg, threadID, (error, info) => {
           if (!error) {
             global.GoatBot.onReply.set(info.messageID, {
