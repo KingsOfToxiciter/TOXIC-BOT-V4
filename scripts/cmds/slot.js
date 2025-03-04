@@ -42,7 +42,7 @@ module.exports = {
       return message.reply(getLang("not_enough_money"));
     }
 
-    const slots = ["🍓", "🍆", "🍎", "🍌", "🍍", "🍆", "🍍", "🍊", "🍋", "🍒", "🍍", "🍆"];
+    const slots = ["🍓", "🍆", "🍎", "🍌", "🍍", "🥭", "🫐", "🍊", "🍋", "🍒", "🥞", "🍔"];
     const slot1 = slots[Math.floor(Math.random() * slots.length)];
     const slot2 = slots[Math.floor(Math.random() * slots.length)];
     const slot3 = slots[Math.floor(Math.random() * slots.length)];
