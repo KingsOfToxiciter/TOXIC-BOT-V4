@@ -73,7 +73,7 @@ async function handleAudioCommand(api, event, args, message) {
 
 module.exports = {
     config: {
-        name: "song",
+        name: "surah",
         version: "1.0",
         author: "Vex_Kshitiz",
         countDown: 10,
