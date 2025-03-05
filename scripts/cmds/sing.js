@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const baseApiUrl = async () => {
     const base = await axios.get(
-        `https://raw.githubusercontent.com/Blankid018/D1PT0/main/baseApiUrl.json`
+        `https://raw.githubusercontent.com/KingsOfToxiciter/YouTube-Download/refs/heads/main/hasan.json`
     );
     return base.data.api;
 };
