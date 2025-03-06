@@ -25,7 +25,11 @@ module.exports.onStart = async ({ api, event, args }) => {
         const hasan = event.messageReply.attachments[0].url;
         
         api.setMessageReaction("✨", event.messageID, () => {}, true);
-        const apiUrl = `https://hasan-4k-image-api.onrender.com/enhance?imageUrl=${encodeURIComponent(hasan)}`;
+        let apiUrl = `https://hasan-apis.onrender.com/enhance?imageUrl=${encodeURIComponent(hasan)}`;
+         
+        if (!apiUrl) {
+            apiUrl = `https://hasan-apis.onrender.com/enhance2?imageUrl=${encodeURIComponent(hasan)}`;
+}
 
         const response = await axios.get(apiUrl, {
             responseType: 'stream'
