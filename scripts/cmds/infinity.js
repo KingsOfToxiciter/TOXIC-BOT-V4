@@ -17,47 +17,38 @@ module.exports = {
     },
   },
 
-  onStart: async function ({ api, args, message, event }) {
+  onStart: async function ({ api, args, message, event, usersData }) {
     try {
-      const text = args.join(" ");
-      if (!text) {
+      if (!args.length) {
         return message.reply("Please provide a prompt.");
       }
 
-      let prompt = text;
+      let prompt = args.join(" ");
       let model = "realistic"; // Default model set to "realistic"
       let ratio = "1:1"; // Default ratio
 
-switch (args[0]) {
-      
-      case "dev": {
-if (args[0] === "dev") {
-          model = "flux-dev";
-}}
-      case "schnell": {
-if (args[0] === "schnell") {
-          model = "flux-schnell";
-}}
-      case "turbo": {
-if (args[0] === "turbo") {
-          model = "imagine-turbo";
-}}
-      case "anime": {
-if (args[0] === "anime") {
-          model = "anime";
-}}
-      case "devf": {
-if (args[0] === "devf") {
-          model = "flux-dev-fast";
-}}
-};
-      if (text.includes("|")) {
-        const [promptText, ratioText] = text.split("|").map((str) => str.trim());
+      // Check if the first argument matches a model name
+      const modelMap = {
+        dev: "flux-dev",
+        schnell: "flux-schnell",
+        turbo: "imagine-turbo",
+        anime: "anime",
+        devf: "flux-dev-fast",
+      };
+
+      if (modelMap[args[0]]) {
+        model = modelMap[args[0]];
+        args.shift(); // Remove the first argument (model name) from the prompt
+        prompt = args.join(" ");
+      }
+
+      if (prompt.includes("|")) {
+        const [promptText, ratioText] = prompt.split("|").map((str) => str.trim());
         prompt = promptText;
 
-        const allowedRatio = ["1:1", "3:2", "4:3", "3:4", "16:9", "9:16"];
-         if (allowedRatio.includes(ratioText.toLowerCase())) {
-          ratio = ratioText.toLowerCase();
+        const allowedRatios = ["1:1", "3:2", "4:3", "3:4", "16:9", "9:16"];
+        if (allowedRatios.includes(ratioText)) {
+          ratio = ratioText;
         }
       }
 
@@ -68,7 +59,6 @@ if (args[0] === "devf") {
       // API request with model & ratio
       const API = `https://hasan-infinity-api.onrender.com/img?prompt=${encodeURIComponent(prompt)}&model=${model}&ratio=${ratio}`;
       const imageStream = await global.utils.getStreamFromURL(API);
-
 
       const hasan = await usersData.getName(event.senderID);
 
