@@ -28,18 +28,35 @@ module.exports = {
       let model = "realistic"; // Default model set to "realistic"
       let ratio = "1:1"; // Default ratio
 
+switch (args[0]) {
+      
+      case "dev": {
+if (args[0] === "dev") {
+          model = "flux-dev";
+}}
+      case "schnell": {
+if (args[0] === "schnell") {
+          model = "flux-schnell";
+}}
+      case "turbo": {
+if (args[0] === "turbo") {
+          model = "imagine-turbo";
+}}
+      case "anime": {
+if (args[0] === "anime") {
+          model = "anime";
+}}
+      case "devf": {
+if (args[0] === "devf") {
+          model = "flux-dev-fast";
+}}
+};
       if (text.includes("|")) {
-        const [promptText, modelText, ratioText] = text.split("|").map((str) => str.trim());
+        const [promptText, ratioText] = text.split("|").map((str) => str.trim());
         prompt = promptText;
-        
-        // Only accept predefined models
-        const allowedModels = ["realistic", "flux-dev", "flux-dev-fast", "anime", "flux-schnell", "imagine-turbo"];
-        if (allowedModels.includes(modelText.toLowerCase())) {
-          model = modelText.toLowerCase();
-        }
-        
+
         const allowedRatio = ["1:1", "3:2", "4:3", "3:4", "16:9", "9:16"];
-        if (allowedRatio.includes(ratioText.toLowerCase())) {
+         if (allowedRatio.includes(ratioText.toLowerCase())) {
           ratio = ratioText.toLowerCase();
         }
       }
@@ -52,9 +69,12 @@ module.exports = {
       const API = `https://hasan-infinity-api.onrender.com/img?prompt=${encodeURIComponent(prompt)}&model=${model}&ratio=${ratio}`;
       const imageStream = await global.utils.getStreamFromURL(API);
 
+
+      const hasan = await usersData.getName(event.senderID);
+
       // Send the generated image
       await message.reply({
-        body: `🎊 | 𝐇𝐞𝐫𝐞 𝐢𝐬 𝐲𝐨𝐮𝐫 𝐮𝐥𝐭𝐫𝐚 𝐫𝐞𝐚𝐥𝐢𝐬𝐭𝐢𝐜 𝐢𝐦𝐚𝐠𝐞.\n\n𝐶𝑟𝑒𝑎𝑡𝑒𝑑 𝑏𝑦: ♡︎ 𝐇𝐀𝐒𝐀𝐍 ♡︎\n\n🏞️ Model Used: ${model}\n🔖 Ratio Used: ${ratio}`,
+        body: `🎊 | 𝐇𝐞𝐫𝐞 𝐢𝐬 𝐲𝐨𝐮𝐫 𝐮𝐥𝐭𝐫𝐚 𝐫𝐞𝐚𝐥𝐢𝐬𝐭𝐢𝐜 𝐢𝐦𝐚𝐠𝐞.\n\n𝐶𝑟𝑒𝑎𝑡𝑒𝑑 𝑏𝑦: ♡︎ ${hasan} ♡︎\n\n🏞️ Model Used: ${model}\n🔖 Ratio Used: ${ratio}`,
         attachment: imageStream,
       });
 
