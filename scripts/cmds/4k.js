@@ -25,10 +25,10 @@ module.exports.onStart = async ({ api, event, args }) => {
         const hasan = event.messageReply.attachments[0].url;
         
         api.setMessageReaction("✨", event.messageID, () => {}, true);
-        let apiUrl = `https://hasan-apis.onrender.com/enhance?imageUrl=${encodeURIComponent(hasan)}`;
+        let apiUrl = `https://hasan-apis.onrender.com/upscale?imageUrl=${encodeURIComponent(hasan)}`;
          
-        if (!apiUrl) {
-            apiUrl = `https://hasan-apis.onrender.com/enhance2?imageUrl=${encodeURIComponent(hasan)}`;
+        if (args[0] === "ultra") {
+            apiUrl = `https://hasan-apis.onrender.com/enhance?imageUrl=${encodeURIComponent(hasan)}`;
 }
 
         const response = await axios.get(apiUrl, {
