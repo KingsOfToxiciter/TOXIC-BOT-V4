@@ -13,7 +13,7 @@ module.exports = {
     guide: {
       vi: "",
       en:
-        "Type {pn} with your prompts\nExample: {pn} cute dog\nYou can also specify a model and ratio (optional).\nExample: {pn} cute dog | anime | 1:1",
+        "Type {pn} with your prompts\nExample: {pn} cute dog\nYou can also specify a model and ratio (optional).\n{pn} [model] prompt | [ratio]\nExample: {pn} anime dog | 1:1",
     },
   },
 
@@ -24,10 +24,10 @@ module.exports = {
       }
 
       let prompt = args.join(" ");
-      let model = "realistic"; // Default model set to "realistic"
-      let ratio = "1:1"; // Default ratio
+      let model = "realistic"; 
+      let ratio = "1:1"; 
 
-      // Check if the first argument matches a model name
+      
       const modelMap = {
         dev: "flux-dev",
         schnell: "flux-schnell",
@@ -38,7 +38,7 @@ module.exports = {
 
       if (modelMap[args[0]]) {
         model = modelMap[args[0]];
-        args.shift(); // Remove the first argument (model name) from the prompt
+        args.shift();
         prompt = args.join(" ");
       }
 
@@ -52,28 +52,28 @@ module.exports = {
         }
       }
 
-      // Indicate that the process has started
+      
       const waitingMessage = await message.reply("✨ | Creating your ultra realistic Image...");
       api.setMessageReaction("✨", event.messageID, () => {}, true);
 
-      // API request with model & ratio
-      const API = `https://hasan-infinity-api.onrender.com/img?prompt=${encodeURIComponent(prompt)}&model=${model}&ratio=${ratio}`;
+      
+      const API = `https://hasan-apis.onrender.com/infinity?prompt=${encodeURIComponent(prompt)}&model=${model}&ratio=${ratio}`;
       const imageStream = await global.utils.getStreamFromURL(API);
 
       const hasan = await usersData.getName(event.senderID);
 
-      // Send the generated image
+      
       await message.reply({
         body: `🎊 | 𝐇𝐞𝐫𝐞 𝐢𝐬 𝐲𝐨𝐮𝐫 𝐮𝐥𝐭𝐫𝐚 𝐫𝐞𝐚𝐥𝐢𝐬𝐭𝐢𝐜 𝐢𝐦𝐚𝐠𝐞.\n\n𝐶𝑟𝑒𝑎𝑡𝑒𝑑 𝑏𝑦: ♡︎ ${hasan} ♡︎\n\n🏞️ Model Used: ${model}\n🔖 Ratio Used: ${ratio}`,
         attachment: imageStream,
       });
 
-      // Change reaction
+      
       setTimeout(() => {
         api.setMessageReaction("💗", event.messageID, () => {}, true);
       }, 2000);
 
-      // Unsending waiting message
+      
       await api.unsendMessage(waitingMessage.messageID);
     } catch (error) {
       console.error(error);
