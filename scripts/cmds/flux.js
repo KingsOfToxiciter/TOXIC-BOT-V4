@@ -1,19 +1,19 @@
 module.exports = {
   config: {
     name: "flux",
+    aliases:[],
     version: "1.0",
     author: "♡︎ 𝐻𝑎𝑠𝑎𝑛 ♡︎",
-    countDown: 2,
+    countDown: 3, 
     role: 0,
     longDescription: {
       vi: "",
-      en: "Get images from text.",
+      en: "Get image from your provided prompt",
     },
     category: "image",
     guide: {
       vi: "",
-      en:
-        "{pn} prompt to generate images",
+      en: "{pn} prompt to generate image with flux-schnell ai",
     },
   },
 
@@ -25,32 +25,29 @@ module.exports = {
       }
 
       let prompt = text;
-      let model = "3"; // Default model if not provided
-      let ratio = "1:1"; // Default ratio if not provided
 
-      // Check if a model and ratio are specified in the prompt
-      if (text.includes("|")) {
-        const [promptText, modelText, ratioText] = text.split("|").map((str) => str.trim());
-        prompt = promptText;
-        model = modelText || model; // Use provided model, or fallback to default
-        ratio = ratioText || ratio; // Use provided ratio, or fallback to default
-      }
+      
+      const waitingMessage = await message.reply("✨ | creating your request...");
+      api.setMessageReaction("⏱️", event.messageID, () => {}, true);
+      const startTime = new Date().getTime();
 
-      // Send a quick message to indicate the process is ongoing
-      const waitingMessage = await message.reply("⏳ | Creating your Imagination...");
+      
+      const API = `https://hasan-apis.onrender.com/flux?prompt=${encodeURIComponent(prompt)}`;
 
-      // Build the API URL using the provided prompt
-      const API = `https://hasan-fluxs-api.onrender.com/imagine?prompt=${encodeURIComponent(prompt)}`;
-
-      // Make the API call to get the image quickly
+      
       const imageStream = await global.utils.getStreamFromURL(API);
+      const endTime = new Date().getTime();
+      const timeTaken = (endTime - startTime) / 1000;
 
-      // Send the generated image as an attachment
+      
       await message.reply({
+        body: `Here is your generated image\n\n📝𝗽𝗿𝗼𝗺𝗽𝘁: ${prompt}\n⏱️𝗧𝗮𝗸𝗲𝗻 𝗧𝗶𝗺𝗲: ${timeTaken} second`,
         attachment: imageStream,
       });
 
-      // Unsending the waiting message and sending the final response
+      api.setMessageReaction("✅", event.messageID, () => {}, true);
+
+      
       await api.unsendMessage(waitingMessage.messageID);
 
     } catch (error) {
