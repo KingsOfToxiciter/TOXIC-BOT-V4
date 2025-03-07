@@ -4,7 +4,7 @@ module.exports = {
     aliases: ["anigen"],
     version: "1.0",
     author: "Anas & ♡︎ 𝐻𝑎𝑠𝑎𝑛 ♡︎",
-    countDown: 3, // Reduced countdown for faster response
+    countDown: 3, 
     role: 0,
     longDescription: {
       vi: "",
@@ -28,21 +28,21 @@ module.exports = {
       let prompt = text;
       
 
-      // Send a quick message to indicate the process is ongoing
-      const waitingMessage = await message.reply("⏰ | Creating your Imagination...");
+      
+      const waitingMessage = await message.reply("⏰ | Creating your Animagination...");
 
-      // Build the API URL using the provided prompt
-      const API = `https://hasan-animagine-api.onrender.com/imagine?prompt=${encodeURIComponent(prompt)}`;
+      
+      const API = `https://hasan-apis.onrender.com/anigen?prompt=${encodeURIComponent(prompt)}`;
 
-      // Make the API call to get the image quickly
+      
       const imageStream = await global.utils.getStreamFromURL(API);
 
-      // Send the generated image as an attachment
+      
       await message.reply({
         attachment: imageStream,
       });
 
-      // Unsending the waiting message and sending the final response
+      
       await api.unsendMessage(waitingMessage.messageID);
 
     } catch (error) {
