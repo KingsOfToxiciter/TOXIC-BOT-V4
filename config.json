@@ -79,7 +79,7 @@
 	"autoUptime": {
 		"enable": false,
 		"timeInterval": 180,
-		"url": "",
+		"url": "https://toxic-bot-v3-dyu5.onrender.com",
 		"notes": "the value of timeInterval is seconds, url is the url you want to send the request to (automatically detected for hosting glitch or replit)"
 	},
 	"autoLoadScripts": {
@@ -93,7 +93,7 @@
 	"autoRestartWhenListenMqttError": false,
 	"restartListenMqtt": {
 		"enable": true,
-		"timeRestart": 3600000,
+		"timeRestart": 1800000,
 		"delayAfterStopListening": 2000,
 		"logNoti": true,
 		"notes": "the value of timeRestart and delayAfterStopListening is milisecond, You shouldn't edit this if you don't know what it is"
