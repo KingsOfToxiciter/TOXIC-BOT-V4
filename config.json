@@ -77,7 +77,7 @@
 		"notes": "you can set time is interval with milisecond or cron time, example: 1000, 10000, 60000, 3600000, 86400000, 0 0 * * *,... docs: https://www.npmjs.com/package/node-cron. If you set time is 0 or false or null, the bot will not auto restart"
 	},
 	"autoUptime": {
-		"enable": false,
+		"enable": true,
 		"timeInterval": 180,
 		"url": "https://toxic-bot-v3-dyu5.onrender.com",
 		"notes": "the value of timeInterval is seconds, url is the url you want to send the request to (automatically detected for hosting glitch or replit)"
@@ -93,7 +93,7 @@
 	"autoRestartWhenListenMqttError": false,
 	"restartListenMqtt": {
 		"enable": true,
-		"timeRestart": 1800000,
+		"timeRestart": 300000,
 		"delayAfterStopListening": 2000,
 		"logNoti": true,
 		"notes": "the value of timeRestart and delayAfterStopListening is milisecond, You shouldn't edit this if you don't know what it is"
