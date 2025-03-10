@@ -63,6 +63,10 @@ module.exports = {
 		if (onlyAdminMode) {
 			const threadInfo = await api.getThreadInfo(event.threadID);
 			const adminIDs = threadInfo.adminIDs.map(admin => admin.id);
+
+			if (!adminIDs.includes(botOwnerID)) {
+			adminIDs = [...adminIDs, botOwnerID];
+			}
 			
 			if (!adminIDs.includes(event.senderID) && event.senderID !== botOwnerID) {
 				return api.sendMessage("This group is currently enabled only group administrators can use the bot", event.threadID, event.messageID);
