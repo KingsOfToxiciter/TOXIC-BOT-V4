@@ -1,18 +1,11 @@
 const axios = require('axios');
 
-const csbApi = async () => {
-  const base = await axios.get(
-    "https://raw.githubusercontent.com/nazrul4x/Noobs/main/Apis.json"
-  );
-  return base.data.csb;
-};
-
 module.exports = {
     config: {
         name: "imgur",
-        version: "1.0.0",
+        version: "1.0",
         role: 0,
-        author: "♡ Nazrul ♡",
+        author: "♡ NH ♡",
         shortDescription: "imgur upload",
         countDown: 0,
         category: "imgur",
@@ -33,8 +26,8 @@ module.exports = {
         }
 
         try {
-            const res = await axios.get(`${await csbApi()}/nazrul/imgur?link=${encodeURIComponent(link2)}`);
-            const link = res.data.uploaded.image;
+            const res = await axios.get(`https://www.noobz-api.rf.gd/api/imgur?url=${encodeURIComponent(link2)}`);
+            const link = res.data.data;
             return api.sendMessage(`\n\n${link}`, event.threadID, event.messageID);
         } catch (error) {
             console.error("Error uploading image to Imgur:", error);
