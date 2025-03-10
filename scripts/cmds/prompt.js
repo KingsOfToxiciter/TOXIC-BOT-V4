@@ -1,14 +1,8 @@
 const axios = require('axios');
-const baseApiUrl = async () => {
-  const base = await axios.get(
-    `https://raw.githubusercontent.com/Blankid018/D1PT0/main/baseApiUrl.json`,
-  );
-  return base.data.api;
-};
 module.exports.config ={
     name: "prompt",
-    version: "6.9",
-    author: "dipto",
+    version: "1.0",
+    author: "♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎",
     countDown: 5,
     role: 0,
     category: "media",
@@ -23,8 +17,10 @@ module.exports.onStart = async ({ api, event,args }) =>{
       return api.sendMessage('Please reply to an image.', event.threadID, event.messageID);
     }
     try {
-      const prom = (await axios.get(`${await baseApiUrl()}/prompt?url=${encodeURIComponent(dip)}`)).data.data[0].response;
-         api.sendMessage(prom, event.threadID, event.messageID);
+      const prom = (await axios.get(`https://www.noobz-api.rf.gd/api/prompt?url=${encodeURIComponent(dip)}`));
+
+const hasan = prom.data;
+         api.sendMessage(hasan, event.threadID, event.messageID);
     } catch (error) {
       console.error(error);
       return api.sendMessage('Failed to convert image into text.', event.threadID, event.messageID);
