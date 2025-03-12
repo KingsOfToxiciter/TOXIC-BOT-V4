@@ -23,10 +23,12 @@ module.exports = {
       const r = Math.floor(Math.random() * s.length);
       const q = s[r];
 
-      const u = `https://pin-two.vercel.app/pin?search=${encodeURIComponent(q)}`;
+     
+      const hasan = global.GoatBot.config.api.apis;
+      const u = `${hasan}/pinterest?search=${encodeURIComponent(q)}`;
 
       const a = await axios.get(u);
-      const l = a.data.result;
+      const l = a.data.data;
 
       const i = Math.floor(Math.random() * l.length);
       const p = l[i];
