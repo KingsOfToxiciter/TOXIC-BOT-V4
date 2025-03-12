@@ -30,8 +30,9 @@ module.exports = {
  }
 
     try {
+      const hasan = global.GoatBot.config.api.apis;
       const response = await axios.get(
-        `${await baseApiUrl()}/quiz2?category=${category}&q=random`,
+        `${hasan}/quiz2?category=${category}&q=random`,
       );
 
       const quizData = response.data.question;
