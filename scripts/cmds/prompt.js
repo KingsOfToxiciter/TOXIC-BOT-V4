@@ -1,13 +1,5 @@
 const axios = require('axios');
 
-async function baigan() {
-   try {
-      const toxic = await axios.get(`https://raw.githubusercontent.com/KingsOfToxiciter/API/refs/heads/main/hasan.json`);
-      return toxic.data.hasan;
-   } catch (error) {
-      console.error("❌ Failed to fetch", error.message);
-   }
-}
 
 module.exports = {
     config: {
@@ -28,7 +20,7 @@ module.exports = {
         }
 
         try {
-            const toxiciter = await baigan();
+            const toxiciter = global.GoatBot.config.api.api;
             const response = await axios.get(`${toxiciter}/prompt?url=${encodeURIComponent(h)}`);
             
             if (!response.data) {
