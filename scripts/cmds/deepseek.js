@@ -1,5 +1,14 @@
 const axios = require("axios");
 
+async function baigan() {
+   try {
+      const toxic = await axios.get(`https://raw.githubusercontent.com/KingsOfToxiciter/API/refs/heads/main/hasan.json`);
+    return toxic.data.hasan;
+} catch (error) {
+      console.error("failed to fetch", error.message);
+   }
+}
+
 module.exports = {
     config: {
         name: "deepseek",
@@ -34,7 +43,8 @@ module.exports = {
 
 async function generateAIResponse(message, senderID, promptText) {
     try {
-        const response = await axios.get(`https://www.noobz-api.rf.gd/api/deepseek?prompt=${encodeURIComponent(promptText)}&type=v3`);
+        const hasan = await baigan();
+        const response = await axios.get(`${hasan}/deepseek?prompt=${encodeURIComponent(promptText)}&type=v3`);
 
         if (!response.data) {
             return message.reply("❌ Failed to get a response, try again later.");
