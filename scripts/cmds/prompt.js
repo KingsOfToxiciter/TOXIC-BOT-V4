@@ -3,38 +3,42 @@ const axios = require('axios');
 async function baigan() {
    try {
       const toxic = await axios.get(`https://raw.githubusercontent.com/KingsOfToxiciter/API/refs/heads/main/hasan.json`);
-    return toxic.data.hasan;
-} catch (error) {
-      console.error("failed to fetch", error.message);
+      return toxic.data.hasan;
+   } catch (error) {
+      console.error("❌ Failed to fetch", error.message);
    }
 }
 
-module.exports.config ={
-    name: "prompt",
-    version: "1.0",
-    author: "♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎",
-    countDown: 5,
-    role: 0,
-    category: "media",
-    description: " image to prompt",
-    category: "tools",
-    usages: "reply [image]"
-  },
+module.exports = {
+    config: {
+        name: "prompt",
+        version: "1.0",
+        author: "♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎",
+        countDown: 5,
+        role: 0,
+        category: "tools",
+        description: "Convert an image to text prompt.",
+        usages: "{pn} [reply to an image]"
+    },
 
-module.exports.onStart = async ({ api, event,args }) =>{
-    const q = event.messageReply?.attachments[0]?.url || args.join(' ');
-    if (!dip) {
-      return api.sendMessage('Please reply to an image.', event.threadID, event.messageID);
-    }
-    try {
-      
-      const api = await baigan();
-      const prompt = (await axios.get(`${api}/prompt?url=${encodeURIComponent(q)}`));
+    onStart: async function ({ api, event, args }) {
+        const h = event.messageReply?.attachments?.[0]?.url || args.join(' ');
+        if (!h) {
+            return api.sendMessage("❌ Please reply to an image.", event.threadID, event.messageID);
+        }
 
-const hasan = prompt.data;
-         api.sendMessage(hasan, event.threadID, event.messageID);
-    } catch (error) {
-      console.error(error);
-      return api.sendMessage('Failed to convert image into text.', event.threadID, event.messageID);
+        try {
+            const toxiciter = await baigan();
+            const response = await axios.get(`${toxiciter}/prompt?url=${encodeURIComponent(h)}`);
+            
+            if (!response.data) {
+                return api.sendMessage("❌ Failed to generate prompt from image.", event.threadID, event.messageID);
+            }
+
+            api.sendMessage(response.data, event.threadID, event.messageID);
+        } catch (error) {
+            console.error("❌ Error:", error.message);
+            api.sendMessage("❌ An error occurred while processing the image.", event.threadID, event.messageID);
+        }
     }
-  };
+};
