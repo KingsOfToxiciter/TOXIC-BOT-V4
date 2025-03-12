@@ -25,11 +25,11 @@ module.exports.onStart = async ({ api, event, args }) => {
         const hasan = event.messageReply.attachments[0].url;
         
         api.setMessageReaction("✨", event.messageID, () => {}, true);
-        const hasan = global.GoatBot.config.api.hasan;
-        let apiUrl = `${hasan}/upscale?imageUrl=${encodeURIComponent(hasan)}`;
+        const toxic = global.GoatBot.config.api.hasan;
+        let apiUrl = `${toxic}/upscale?imageUrl=${encodeURIComponent(hasan)}`;
          
         if (args[0] === "ultra") {
-            apiUrl = `${hasan}/enhance?imageUrl=${encodeURIComponent(hasan)}`;
+            apiUrl = `${toxic}/enhance?imageUrl=${encodeURIComponent(hasan)}`;
 }
 
         const response = await axios.get(apiUrl, {
