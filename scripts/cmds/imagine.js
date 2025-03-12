@@ -32,7 +32,7 @@ module.exports = {
       const startTime = new Date().getTime();
 
 
-      const a = global.GoatBot.config.api.hasan
+      const a = global.GoatBot.config.api.hasan;
       const API = `${a}/imagine?prompt=${encodeURIComponent(prompt)}`;
 
       
