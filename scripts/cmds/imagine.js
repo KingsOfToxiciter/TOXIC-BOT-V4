@@ -31,8 +31,9 @@ module.exports = {
       api.setMessageReaction("⏱️", event.messageID, () => {}, true);
       const startTime = new Date().getTime();
 
-      
-      const API = `https://hasan-apis.onrender.com/imagine?prompt=${encodeURIComponent(prompt)}`;
+
+      const a = global.GoatBot.config.api.hasan
+      const API = `${a}/imagine?prompt=${encodeURIComponent(prompt)}`;
 
       
       const imageStream = await global.utils.getStreamFromURL(API);
