@@ -26,7 +26,9 @@ module.exports = {
         }
 
         try {
-            const res = await axios.get(`https://www.noobz-api.rf.gd/api/imgur?url=${encodeURIComponent(link2)}`);
+
+    const toxiciter = global.GoatBot.config.api.api;
+            const res = await axios.get(`${toxiciter}/api/imgur?url=${encodeURIComponent(link2)}`);
             const link = res.data.data;
             return api.sendMessage(`\n\n${link}`, event.threadID, event.messageID);
         } catch (error) {
