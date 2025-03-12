@@ -32,7 +32,9 @@ module.exports = {
       const waitingMessage = await message.reply("⏰ | Creating your Animagination...");
 
       
-      const API = `https://hasan-apis.onrender.com/anigen?prompt=${encodeURIComponent(prompt)}`;
+      const h = global.GoatBot.config.api.hasan;
+      
+      const API = `${h}/anigen?prompt=${encodeURIComponent(prompt)}`;
 
       
       const imageStream = await global.utils.getStreamFromURL(API);
