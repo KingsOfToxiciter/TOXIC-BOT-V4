@@ -23,7 +23,8 @@ module.exports.onStart = async ({ api, event, args }) => {
         }
 
         const hasan = event.messageReply.attachments[0].url;
-        const apiUrl = `https://hasan-apis.onrender.com/rbg?imageUrl=${encodeURIComponent(hasan)}`;
+        const baigan = global.GoatBot.config.api.hasan;
+        const apiUrl = `${baigan}/rbg?imageUrl=${encodeURIComponent(hasan)}`;
 
         const response = await axios.get(apiUrl, {
             responseType: 'stream'
