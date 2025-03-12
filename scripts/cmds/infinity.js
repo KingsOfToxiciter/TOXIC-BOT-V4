@@ -56,8 +56,8 @@ module.exports = {
       const waitingMessage = await message.reply("✨ | Creating your ultra realistic Image...");
       api.setMessageReaction("✨", event.messageID, () => {}, true);
 
-      
-      const API = `https://hasan-apis.onrender.com/infinity?prompt=${encodeURIComponent(prompt)}&model=${model}&ratio=${ratio}`;
+      const y = global.GoatBot.config.api.hasan;
+      const API = `${y}/infinity?prompt=${encodeURIComponent(prompt)}&model=${model}&ratio=${ratio}`;
       const imageStream = await global.utils.getStreamFromURL(API);
 
       const hasan = await usersData.getName(event.senderID);
