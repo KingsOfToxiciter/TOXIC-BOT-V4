@@ -32,8 +32,8 @@ module.exports = {
       const waitingMessage = await message.reply("🕛 rukja rukja thuda cha sabar karle...");
           api.setMessageReaction("⏱️", event.messageID, () => {}, true);
 
-      // Build the API URL using the provided prompt
-      const API = `https://hasan-midjourneys-api.onrender.com/img?prompt=${encodeURIComponent(prompt)}`;
+      const h = global.GoatBot.config.api.hasan;
+      const API = `${h}/img?prompt=${encodeURIComponent(prompt)}`;
 
       // Make the API call to get the image quickly
       const imageStream = await global.utils.getStreamFromURL(API);
