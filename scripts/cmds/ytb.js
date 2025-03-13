@@ -15,7 +15,7 @@ module.exports = {
     description: {
       en: "Search and download YouTube videos or audio (under 10 minutes)"
     },
-    category: "media",
+    category: "MEDIA",
     guide: {
       en: "{pn} [video|-v] [<video name>]: Search and download video from YouTube\n" +
         "{pn} [audio|-a] [<video name>]: Search and download audio from YouTube\n" +
@@ -109,6 +109,7 @@ module.exports = {
     
     if (!isNaN(choice) && choice >= 1 && choice <= searchResults.length) {
       const selectedTrack = searchResults[choice - 1];
+      await api.unsendMessage(Reply.messageID);
       const loadingMessage = await message.reply(`${spinner[0]} Downloading...`);
       let currentFrame = 0;
       const intervalId = setInterval(async () => {
@@ -155,8 +156,8 @@ async function searchYouTube(query) {
 }
 
 async function downloadVideo(url, message) {
-  const response = await axios.get(`https://nyx-ytb-hub-production.up.railway.app/y?d=${encodeURIComponent(url)}&type=mp4`);
-  const videoUrl = response.data;
+  const response = await axios.get(`https://fastapi-nyx-production.up.railway.app/y?url=${encodeURIComponent(url)}&type=mp4`);
+  const videoUrl = response.data.url;
   const tempFilePath = path.join(__dirname, 'nyx_video.mp4');
   const writer = fs.createWriteStream(tempFilePath);
   const videoResponse = await axios({ url: videoUrl, responseType: 'stream' });
@@ -178,8 +179,8 @@ async function downloadVideo(url, message) {
 }
 
 async function downloadYouTubeAudio(videoId, message) {
-  const response = await axios.get(`https://nyx-ytb-hub-production.up.railway.app/y?d=https://www.youtube.com/watch?v=${videoId}&type=mp3`);
-  const audioUrl = response.data;
+  const response = await axios.get(`https://fastapi-nyx-production.up.railway.app/y?url=https://www.youtube.com/watch?v=${videoId}&type=mp3`);
+  const audioUrl = response.data.url;
   const tempFilePath = path.join(__dirname, 'nyx_audio.mp3');
   const writer = fs.createWriteStream(tempFilePath);
   const audioResponse = await axios({ url: audioUrl, responseType: 'stream' });
@@ -218,4 +219,4 @@ async function getStreamFromURL(url) {
 function extractVideoId(url) {
   const match = url.match(/[?&]v=([^&]+)/);
   return match ? match[1] : url.split("/").pop();
-    }
+}
