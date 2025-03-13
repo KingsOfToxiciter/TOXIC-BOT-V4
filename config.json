@@ -137,11 +137,11 @@
 		"presence": false
 	},
 
-  "api": {
-         "hasan": "https://hasan-all-apis.onrender.com",
-  "apis": "https://www.noobs-api.rf.gd/dipto",
-  "api": "https://www.noobz-api.rf.gd/api"
-},
+        "api": {
+                "hasan": "https://hasan-all-apis.onrender.com",
+                "apis": "https://www.noobs-api.rf.gd/dipto",
+                "api": "https://www.noobz-api.rf.gd/api"
+        },
 
 	"optionsFca": {
 		"forceLogin": true,
