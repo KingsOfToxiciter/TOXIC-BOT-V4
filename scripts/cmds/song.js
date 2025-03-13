@@ -1,80 +1,79 @@
 const axios = require("axios");
 const fs = require("fs");
-
-const baseApiUrl = async () => {
-  const base = await axios.get(
-    `https://raw.githubusercontent.com/KingsOfToxiciter/YouTube-Download/refs/heads/main/hasan.json`
-  );
-  return base.data.api;
-};
+const path = require("path");
 
 module.exports = {
   config: {
-    name: "song",
-    version: "1.0.0",
-    aliases: ["mp3", "audio"],
-    author: "dipto",
-    countDown: 5,
+    name: "gan",
+    aliases:["song", "surah"],
+    version: "1.0",
+    author: "♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎",
+    countDown: 2,
     role: 0,
     description: {
-      en: "Download audio (MP3) from YouTube",
+      en: "Download audio from given keyword.",
     },
-    category: "media",
+    category: "MEDIA",
     guide: {
-      en: "  {pn} [<video name>|<video link>]: use to download audio from YouTube."
-          + "\n   Example:"
-          + "\n {pn} despacito"
-          + "\n {pn} https://youtu.be/abc123xyz",
+      en: "{pn} song name ",
     },
   },
 
-  onStart: async ({ api, args, event }) => {
-    if (args.length === 0) {
-      return api.sendMessage("❌ Please provide a YouTube video name or link.", event.threadID, event.messageID);
+  onStart: async function ({ api, args, event }) {
+    const h = args.join(" ");
+    const hasan = await axios.get(`https://hasan-all-apis.onrender.com/ytb-search?songName=${h}`);
+
+    if (!hasan.data || hasan.data.length === 0 || !hasan.data[0].videoId) {
+      api.setMessageReaction("❌", event.messageID, () => {}, true);
+      return api.sendMessage("⁉️ | No video found for the given name.", event.threadID, event.messageID);
     }
 
-    const checkurl =
-      /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))((\w|-){11})(?:\S+)?$/;
-    
-    let videoID;
-    if (checkurl.test(args[0])) {
-      const match = args[0].match(checkurl);
-      videoID = match ? match[1] : null;
-    } else {
-      const searchQuery = args.join(" ");
-      try {
-        const searchResults = await axios.get(`${await baseApiUrl()}/ytFullSearch?songName=${searchQuery}`);
-        if (!searchResults.data.length) {
-          return api.sendMessage(`⭕ No search results found for: ${searchQuery}`, event.threadID, event.messageID);
-        }
-        videoID = searchResults.data[0].id;
-      } catch (error) {
-        return api.sendMessage("❌ An error occurred while searching.", event.threadID, event.messageID);
-      }
-    }
+    const videoID = hasan.data[0].videoId;
+    const title = hasan.data[0].title;
 
     try {
-      const format = "mp3";
-      const path = `yt_audio_${videoID}.${format}`;
-      const { data: { title, downloadLink, quality } } = await axios.get(`${await baseApiUrl()}/ytDl3?link=${videoID}&format=${format}&quality=3`);
-      
-      await api.sendMessage({
-        body: `🎵 Title: ${title}\n🎧 Quality: ${quality}`,
-        attachment: await downloadFile(downloadLink, path),
-      }, event.threadID, () => fs.unlinkSync(path), event.messageID);
-    } catch (e) {
-      console.error(e);
-      return api.sendMessage("❌ Failed to download the audio. Please try again later.", event.threadID, event.messageID);
+      api.setMessageReaction("⏳", event.messageID, () => {}, true);
+
+      const response = await axios.get(`https://fastapi-nyx-production.up.railway.app/y?url=https://www.youtube.com/watch?v=${videoID}&type=mp3`);
+
+      if (!response.data || !response.data.url) {
+        throw new Error("❌ | API response error. Please check the API status.");
+      }
+
+      const videoDownloadLink = response.data.url;
+
+      const cachePath = path.join(__dirname, "cache");
+      if (!fs.existsSync(cachePath)) {
+        fs.mkdirSync(cachePath);
+      }
+
+      const filePath = path.join(cachePath, "video.mp3");
+      const { data } = await axios.get(videoDownloadLink, { responseType: "stream" });
+
+      const writer = fs.createWriteStream(filePath);
+      data.pipe(writer);
+
+      writer.on("finish", () => {
+        api.setMessageReaction("✅", event.messageID, () => {}, true);
+        api.sendMessage(
+          {
+            body: `✨ | Here is your audio: ${title}`,
+            attachment: fs.createReadStream(filePath),
+          },
+          event.threadID,
+          () => fs.unlinkSync(filePath),
+          event.messageID
+        );
+      });
+
+      writer.on("error", (err) => {
+        console.error("❌ | File writing error:", err.message);
+        api.sendMessage("❌ | File writing error occurred!", event.threadID, event.messageID);
+      });
+
+    } catch (error) {
+      api.setMessageReaction("❎", event.messageID, () => {}, true);
+      api.sendMessage(`❌ | Error:\n${error.message}`, event.threadID, event.messageID);
     }
   },
 };
-
-async function downloadFile(url, pathName) {
-  try {
-    const response = (await axios.get(url, { responseType: "arraybuffer" })).data;
-    fs.writeFileSync(pathName, Buffer.from(response));
-    return fs.createReadStream(pathName);
-  } catch (err) {
-    throw err;
-  }
-	    }
