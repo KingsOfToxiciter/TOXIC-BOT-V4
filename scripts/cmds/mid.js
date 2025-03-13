@@ -33,7 +33,7 @@ module.exports = {
           api.setMessageReaction("⏱️", event.messageID, () => {}, true);
 
       const h = global.GoatBot.config.api.hasan;
-      const API = `${h}/img?prompt=${encodeURIComponent(prompt)}`;
+      const API = `${h}/midjourney?prompt=${encodeURIComponent(prompt)}`;
 
       // Make the API call to get the image quickly
       const imageStream = await global.utils.getStreamFromURL(API);
