@@ -5,7 +5,7 @@ module.exports = {
         name: "imgur",
         version: "1.0",
         role: 0,
-        author: "♡ NH ♡",
+        author: "♡ 𝐻𝐴𝑆𝐴𝑁 ♡",
         shortDescription: "imgur upload",
         countDown: 0,
         category: "imgur",
@@ -28,7 +28,7 @@ module.exports = {
         try {
 
     const toxiciter = global.GoatBot.config.api.api;
-            const res = await axios.get(`${toxiciter}/api/imgur?url=${encodeURIComponent(link2)}`);
+            const res = await axios.get(`${toxiciter}/imgur?url=${encodeURIComponent(link2)}`);
             const link = res.data.data;
             return api.sendMessage(`\n\n${link}`, event.threadID, event.messageID);
         } catch (error) {
