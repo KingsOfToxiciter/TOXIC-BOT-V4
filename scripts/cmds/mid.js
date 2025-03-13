@@ -28,25 +28,23 @@ module.exports = {
       let prompt = text;
 
 
-      // Send a quick message to indicate the process is ongoing
       const waitingMessage = await message.reply("🕛 rukja rukja thuda cha sabar karle...");
           api.setMessageReaction("⏱️", event.messageID, () => {}, true);
 
       const h = global.GoatBot.config.api.hasan;
       const API = `${h}/midjourney?prompt=${encodeURIComponent(prompt)}`;
 
-      // Make the API call to get the image quickly
+     
       const imageStream = await global.utils.getStreamFromURL(API);
 
-      // Send the generated image as an attachment
+     
       await message.reply({
         attachment: imageStream,
       });
 
 api.setMessageReaction("✅", event.messageID, () => {}, true);
 
-      // Unsending the waiting message and sending the final response
-      await api.unsendMessage(waitingMessage.messageID);
+           await api.unsendMessage(waitingMessage.messageID);
 
     } catch (error) {
       console.log(error);
