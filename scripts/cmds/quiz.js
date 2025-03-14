@@ -26,7 +26,7 @@ module.exports = {
 
             const namePlayerReact = await usersData.getName(event.senderID);
             const quizMsg = {
-                body: `\n╭──✦ ${question}\n├‣ 𝗔) ${a}\n├‣ 𝗕) ${b}\n├‣ 𝗖) ${c}\n├‣ 𝗗) ${d}\n╰──────────────────‣\n𝚁𝚎𝚙𝚕𝚢 𝚝𝚘 𝚝𝚑𝚒𝚜 𝚖𝚎𝚜𝚜𝚊𝚐𝚎 𝚠𝚒𝚝𝚑 𝚢𝚘𝚞𝚛 𝚊𝚗𝚜𝚠𝚎𝚛.`,
+                body: `\n╭──✦ ${question}\n├‣ 𝗔) ${a}\n├‣ 𝗕) ${b}\n├‣ 𝗖) ${c}\n├‣ 𝗗) ${d}\n╰──────────────────‣\n𝑅𝑒𝑝𝑙𝑦 𝑡𝑜 𝑡ℎ𝑖𝑠 𝑚𝑒𝑠𝑠𝑎𝑔𝑒 𝑤𝑖𝑡ℎ 𝑦𝑜𝑢𝑟 𝑎𝑛𝑠𝑤𝑒𝑟 ♡︎`,
             };
 
             api.sendMessage(
@@ -76,13 +76,11 @@ module.exports = {
                     );
                 }
 
-                
+
                 try {
                  const chack = global.GoatBot.config.api.hasan;
-                    const checkResponse = await axios.post(`${chack}/quiz/check`, {
-                        id: Reply.dataGame.id,
-                        answer: userReply
-                    });
+                 const no = Reply.dataGame.id
+                    const checkResponse = await axios.get(`${chack}/quiz/check?id=${no}&answer=${userReply}`);
 
                     if (checkResponse.data.isCorrect) {
                         api.unsendMessage(Reply.messageID).catch(console.error);
