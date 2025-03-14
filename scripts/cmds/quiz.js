@@ -21,7 +21,7 @@ module.exports = {
 
         try {
             const hasan = global.GoatBot.config.api.hasan;
-            const response = await axios.get(`${hasan}/quiz?category=${category}`);
+            const response = await axios.get(`${hasan}/quiz?category=${input}`);
             const quizData = response.data;
             const { question, correctAnswer, options } = quizData;
             const { a, b, c, d } = options;
