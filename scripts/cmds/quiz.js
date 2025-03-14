@@ -17,7 +17,7 @@ module.exports = {
         const type = catagory[Math.floor(Math.random() * catagory.length)];
         const input = args.join('').toLowerCase() || type;
         let timeout = 30;
-        let category = input === "en" ? "english" : "bangla";
+        let category = input === "en" ? "english" : type;
 
         try {
             const hasan = global.GoatBot.config.api.hasan;
