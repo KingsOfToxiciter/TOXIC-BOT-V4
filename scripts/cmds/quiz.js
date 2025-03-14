@@ -14,7 +14,7 @@ module.exports = {
 
     onStart: async function ({ api, event, usersData, args }) {
         const input = args.join('').toLowerCase() || "bn";
-        let timeout = 300;
+        let timeout = 60;
         let category = input === "en" ? "english" : "bangla";
 
         try {
