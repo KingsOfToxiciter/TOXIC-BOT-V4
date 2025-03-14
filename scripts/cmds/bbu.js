@@ -25,7 +25,7 @@ const teachBot = async (api, threadID, messageID, senderID, teachText) => {
     const res = await axios.get(
       `${await getAPIBase()}/bby/teach?ask=${encodeURIComponent(ask)}&ans=${encodeURIComponent(answerArray.join(","))}&uid=${senderID}`
     );
-    const responseMsg = res.data?.message === "✨Teaching recorded successfully!"
+    const responseMsg = res.data?.message === `✨Teaching recorded successfully!\n Your Total Teachings: ${res.data.userStats.user.totalTeachings}`
       ? `Successfully taught the bot!\n📖 Teaching Details:\n- Question: ${res.data.ask}\n- Answers: ${answerArray.join(", ")}\n- Your Total Teachings: ${res.data.userStats.user.totalTeachings}`
       : res.data?.message || "Teaching failed.";
     return sendMessage(api, threadID, responseMsg, messageID);
@@ -77,7 +77,7 @@ const botMsgInfo = async (api, threadID, messageID, senderID, input) => {
   }
 };
 
-const deleteMessage = async (api, threadID, messageID, senderID, input) => {
+const deleteMessage = async (api, threadID, messageID, senderID, input, event) => {
   const hasan = ["100068909067279"];
   if (!hasan.includes(event.senderID)){
     return message.reply("❕ | you don't have that permission");
@@ -119,7 +119,7 @@ const deleteMessage = async (api, threadID, messageID, senderID, input) => {
   }
 };
 
-const editMessage = async (api, threadID, messageID, senderID, input) => {
+const editMessage = async (api, threadID, messageID, senderID, input, event) => {
   const hasan = ["100068909067279"];
   if (!hasan.includes(event.senderID)){
     return message.reply("❕ | you don't have that permission");
