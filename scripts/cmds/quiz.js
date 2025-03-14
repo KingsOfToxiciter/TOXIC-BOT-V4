@@ -13,8 +13,10 @@ module.exports = {
     },
 
     onStart: async function ({ api, event, usersData, args }) {
-        const input = args.join('').toLowerCase() || "bn";
-        let timeout = 60;
+        const catagory = ["general", "science", "person", "game", "history", "english"];
+        const type = catagory[Math.floor(Math.random() * catagory.length)];
+        const input = args.join('').toLowerCase() || type;
+        let timeout = 30;
         let category = input === "en" ? "english" : "bangla";
 
         try {
