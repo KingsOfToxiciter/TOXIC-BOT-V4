@@ -1,79 +1,31 @@
-const axios = require("axios");
-const fs = require("fs");
-const path = require("path");
-
+const axios = require('axios');
+const config = {
+  name:'song',
+  aliases:['surah', 'gan'],
+  author:'Romim',
+  category:'MEDIA'
+}
+const onStart = async ({args,api,message,event}) => {
+  const data = args.join(' ')
+  try {
+    const req = await axios.get(`https://www.noobz-api.rf.gd/api/SoundCloudsearch?query=${data}`)
+    api.setMessageReaction("⏳", event.messageID, () => {}, true);
+    const item1 = req.data[0];
+    const title = item1.title;
+    const url = item1.permalink_url;
+    const downloadRequest = await axios.get(`https://www.noobz-api.rf.gd/api/soundcloud?url=${url}`)
+    const url2 = downloadRequest.data.cloudinary_url;
+    message.reply({
+        body: `Here's Your song 🎵
+   \n title:${title}`,
+        attachment: await global.utils.getStreamFromUrl(url2),
+      });
+      api.setMessageReaction("✅", event.messageID, () => {}, true);
+  } catch (e) {
+    message.reply(e.message)
+  }
+}
 module.exports = {
-  config: {
-    name: "gan",
-    aliases:["song", "surah"],
-    version: "1.0",
-    author: "♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎",
-    countDown: 2,
-    role: 0,
-    description: {
-      en: "Download audio from given keyword.",
-    },
-    category: "MEDIA",
-    guide: {
-      en: "{pn} song name ",
-    },
-  },
-
-  onStart: async function ({ api, args, event }) {
-    const h = args.join(" ");
-    const hasan = await axios.get(`https://hasan-all-apis.onrender.com/ytb-search?songName=${h}`);
-
-    if (!hasan.data || hasan.data.length === 0 || !hasan.data[0].videoId) {
-      api.setMessageReaction("❌", event.messageID, () => {}, true);
-      return api.sendMessage("⁉️ | No video found for the given name.", event.threadID, event.messageID);
-    }
-
-    const videoID = hasan.data[0].videoId;
-    const title = hasan.data[0].title;
-
-    try {
-      api.setMessageReaction("⏳", event.messageID, () => {}, true);
-
-      const response = await axios.get(`https://fastapi-nyx-production.up.railway.app/y?url=https://www.youtube.com/watch?v=${videoID}&type=mp3`);
-
-      if (!response.data || !response.data.url) {
-        throw new Error("❌ | API response error. Please check the API status.");
-      }
-
-      const videoDownloadLink = response.data.url;
-
-      const cachePath = path.join(__dirname, "cache");
-      if (!fs.existsSync(cachePath)) {
-        fs.mkdirSync(cachePath);
-      }
-
-      const filePath = path.join(cachePath, "video.mp3");
-      const { data } = await axios.get(videoDownloadLink, { responseType: "stream" });
-
-      const writer = fs.createWriteStream(filePath);
-      data.pipe(writer);
-
-      writer.on("finish", () => {
-        api.setMessageReaction("✅", event.messageID, () => {}, true);
-        api.sendMessage(
-          {
-            body: `✨ | Here is your audio: ${title}`,
-            attachment: fs.createReadStream(filePath),
-          },
-          event.threadID,
-          () => fs.unlinkSync(filePath),
-          event.messageID
-        );
-      });
-
-      writer.on("error", (err) => {
-        console.error("❌ | File writing error:", err.message);
-        api.sendMessage("❌ | File writing error occurred!", event.threadID, event.messageID);
-      });
-
-    } catch (error) {
-      api.setMessageReaction("❎", event.messageID, () => {}, true);
-      api.sendMessage(`❌ | Error:\n${error.message}`, event.threadID, event.messageID);
-    }
-  },
-};
+  config,
+  onStart
+}
