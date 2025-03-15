@@ -10,34 +10,29 @@ module.exports.config = {
     longDescription: {
         en: "expend your images"
     },
-    category: "expend",
+    category: "tools",
     guide: {
-        en: "{pn} reply to an image for expend"
+        en: "{pn} reply to an image for expended"
     } 
 };
 
 module.exports.onStart = async ({ api, event, args }) => {
     try {
+      const ratio = args.join(" ") || "1:1";
         if (!event.messageReply || !event.messageReply.attachments || !event.messageReply.attachments[0]) {
-            return api.sendMessage("𝐏𝐥𝐞𝐚𝐬𝐞 𝐫𝐞𝐩𝐥𝐲 𝐭𝐨 𝐚𝐧 𝐢𝐦𝐚𝐠𝐞 𝐰𝐢𝐭𝐡 𝐭𝐡𝐞 𝐜𝐨𝐦𝐦𝐚𝐧𝐝.", event.threadID, event.messageID);
+            return api.sendMessage("𝘗𝘭𝘦𝘢𝘴𝘦 𝘳𝘦𝘱𝘭𝘺 𝘵𝘰 𝘢𝘯 𝘪𝘮𝘢𝘨𝘦 𝘸𝘪𝘵𝘩 𝘵𝘩𝘪𝘴 𝘤𝘮𝘥.", event.threadID, event.messageID);
         }
 
         const hasan = event.messageReply.attachments[0].url;
-        const ratioType = args.join(" ");
-        
-        api.setMessageReaction("✨", event.messageID, () => {}, true);
-        let apiUrl = `https://www.noobz-api.rf.gd/api/expend?imageUrl=${encodeURIComponent(hasan)}&ratioType=${ratioType}`;
-         
-        
+        const baigan = global.GoatBot.config.api.hasan;
+        const apiUrl = `${baigan}/expend?imageUrl=${encodeURIComponent(hasan)}&ratio=${ratio}`;
 
         const response = await axios.get(apiUrl, {
             responseType: 'stream'
         });
-       
-        api.setMessageReaction("✅", event.messageID, () => {}, true);
 
         api.sendMessage({
-            body: "✨| Here is your expended photo",
+            body: "𝐇𝐞𝐫𝐞 𝐢𝐬 𝐲𝐨𝐮𝐫 𝐞𝐱𝐩𝐞𝐧𝐝𝐞𝐝 𝐢𝐦𝐚𝐠𝐞",
             attachment: response.data
         }, event.threadID, event.messageID);
 
