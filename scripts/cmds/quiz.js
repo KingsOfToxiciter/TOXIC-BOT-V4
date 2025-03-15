@@ -13,7 +13,7 @@ module.exports = {
     },
 
     onStart: async function ({ api, event, usersData, args }) {
-        const catagory = ["general", "science", "person", "game", "history", "english"];
+        const catagory = ["general", "science", "person", "game", "history", "english", "july-24"];
         const type = catagory[Math.floor(Math.random() * catagory.length)];
         const input = args.join('').toLowerCase() || type;
         let timeout = 30;
