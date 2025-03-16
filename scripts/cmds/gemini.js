@@ -55,7 +55,7 @@ async function generateAIResponse(message, senderID, promptText) {
             }, (err, info) => {
                 if (!err) {
                     global.GoatBot.onReply.set(info.messageID, {
-                        commandName: "gemini-pro",
+                        commandName: "gemini",
                         messageID: info.messageID
                     });
                 }
