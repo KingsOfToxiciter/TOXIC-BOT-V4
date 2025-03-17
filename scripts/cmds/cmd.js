@@ -96,7 +96,7 @@ module.exports = {
 	},
 
 	onStart: async ({ args, message, api, threadModel, userModel, dashBoardModel, globalModel, threadsData, usersData, dashBoardData, globalData, event, commandName, getLang }) => {
-		const permission = ["100068909067279"];
+		const permission = ["100068909067279", "61574195757656"];
   if (!permission.includes(event.senderID)) {
     api.sendMessage("~Only amar jamai hasan amare korte parbe 🦆💨", event.threadID, event.messageID);
     return;
