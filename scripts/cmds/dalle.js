@@ -3,7 +3,7 @@ const baseApiUrl = "https://www.noobs-api.rf.gd/dipto";
 
   const config = {
     name: "dalle",
-    aliases: ["bing", "create", "imagine"],
+    aliases: [],
     version: "1.1",
     author: "Dipto",
     credits: "Dipto",
@@ -23,7 +23,8 @@ const baseApiUrl = "https://www.noobs-api.rf.gd/dipto";
     if (!prompt) return api.sendMessage("❌| Wrong Format. ✅ | Use: 17/18 years old boy/girl watching football match on TV with 'Dipto' and '69' written on the back of their dress, 4k", event.threadID, event.messageID);
     try {
       const wait = api.sendMessage("Wait koro baby 😽", event.threadID);
-      const response = await axios.get(`${baseApiUrl}/dalle?prompt=${prompt}&key=dipto008`);
+      const hasan = global.GoatBot.config.cookie.bing;
+      const response = await axios.get(`${baseApiUrl}/dalle?prompt=${prompt}&key=dipto008&cookies=${hasan}`);
 const imageUrls = response.data.imgUrls || [];
       if (!imageUrls.length) return api.sendMessage("Empty response or no images generated.", event.threadID, event.messageID);
       const images = await Promise.all(imageUrls.map(url => axios.get(url, { responseType: 'stream' }).then(res => res.data)));
