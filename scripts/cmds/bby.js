@@ -19,7 +19,7 @@ module.exports.config = {
 };
 
 module.exports.onStart = async ({ api, event, args, usersData }) => {
-  const link = `${await baseApiUrl()}/baby`;
+  const link = `${await baseApiUrl()}/baby2`;
   const dipto = args.join(" ").toLowerCase();
   const uid = event.senderID;
   let command, comd, final;
