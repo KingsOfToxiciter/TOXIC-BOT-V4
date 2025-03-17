@@ -28,11 +28,7 @@ module.exports = {
 	},
 
 	onStart: async function ({ api, args, message, event, threadsData, usersData, dashBoardData, globalData, threadModel, userModel, dashBoardModel, globalModel, role, commandName, getLang }) {
-		const permission = ["100068909067279"];
-  if (!permission.includes(event.senderID)) {
-    api.sendMessage("khankir pula tur maire chudi", event.threadID, event.messageID);
-    return;
-  }
+		
 		function output(msg) {
 			if (typeof msg == "number" || typeof msg == "boolean" || typeof msg == "function")
 				msg = msg.toString();
