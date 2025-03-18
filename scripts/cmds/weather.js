@@ -27,12 +27,10 @@ module.exports = {
 		countDown: 5,
 		role: 0,
 		description: {
-			vi: "xem dự báo thời tiết hiện tại và 5 ngày sau",
 			en: "view the current and next 5 days weather forecast"
 		},
 		category: "other",
 		guide: {
-			vi: "{pn} <địa điểm>",
 			en: "{pn} <location>"
 		},
 		envGlobal: {
@@ -41,12 +39,6 @@ module.exports = {
 	},
 
 	langs: {
-		vi: {
-			syntaxError: "Vui lòng nhập địa điểm",
-			notFound: "Không thể tìm thấy địa điểm: %1",
-			error: "Đã xảy ra lỗi: %1",
-			today: "Thời tiết hôm nay: %1\n%2\n🌡 Nhiệt độ thấp nhất - cao nhất %3°C - %4°C\n🌡 Nhiệt độ cảm nhận được %5°C - %6°C\n🌅 Mặt trời mọc %7\n🌄 Mặt trời lặn %8\n🌃 Mặt trăng mọc %9\n🏙️ Mặt trăng lặn %10\n🌞 Ban ngày: %11\n🌙 Ban đêm: %12"
-		},
 		en: {
 			syntaxError: "Please enter a location",
 			notFound: "Location not found: %1",
@@ -64,7 +56,7 @@ module.exports = {
 		let areaKey, dataWeather, areaName;
 
 		try {
-			const response = (await axios.get(`https://api.accuweather.com/locations/v1/cities/search.json?q=${encodeURIComponent(area)}&apikey=${apikey}&language=vi-vn`)).data;
+			const response = (await axios.get(`https://api.accuweather.com/locations/v1/cities/search.json?q=${encodeURIComponent(area)}&apikey=${apikey}&language=en-US`)).data;
 			if (response.length == 0)
 				return message.reply(getLang("notFound", area));
 			const data = response[0];
@@ -76,7 +68,7 @@ module.exports = {
 		}
 
 		try {
-			dataWeather = (await axios.get(`http://api.accuweather.com/forecasts/v1/daily/10day/${areaKey}?apikey=${apikey}&details=true&language=vi`)).data;
+			dataWeather = (await axios.get(`http://api.accuweather.com/forecasts/v1/daily/10day/${areaKey}?apikey=${apikey}&details=true&language=en`)).data;
 		}
 		catch (err) {
 			return message.reply(`❌ Đã xảy ra lỗi: ${err.response.data.Message}`);
