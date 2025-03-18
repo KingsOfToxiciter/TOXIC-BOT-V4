@@ -34,10 +34,10 @@ module.exports = {
 	},
 
 	onStart: async function ({ message, args, usersData, event, getLang, api }) {
-    const permission = ["100068909067279"];
+    const permission = global.GoatBot.config.owner;
     if (!permission.includes(event.senderID)) {
       api.sendMessage(
-        "~Who are you bby tumar ki lojjah sorom nai ?!🐐🤌",
+        "Ke tumi botsho 😷❄️?",
         event.threadID,
         event.messageID
       );
