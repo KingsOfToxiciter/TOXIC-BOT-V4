@@ -4,7 +4,7 @@ const { writeFileSync } = require("fs-extra");
 module.exports = {
     config: {
         name: "permission",
-        aliases:["owner"],
+        aliases:["own"],
         version: "1.1",
         author: "♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎",
         countDown: 5,
@@ -29,6 +29,13 @@ module.exports = {
     },
 
     onStart: async function ({ message, args, usersData, event, getLang }) {
+
+const permission = global.GoatBot.config.owner;
+  if (!permission.includes(event.senderID)) {
+    api.sendMessage("Permission dewar tui ke bey? 🐸✌️", event.threadID, event.messageID);
+    return;
+  }
+
         switch (args[0]) {
             case "add":
             case "-a": {
