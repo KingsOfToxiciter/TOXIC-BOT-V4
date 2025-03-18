@@ -37,9 +37,9 @@ module.exports = {
 	},
 
 	onStart: async function ({ message, event, getLang }) {
-		const permission = ["100068909067279"];
+		const permission = global.GoatBot.config.owner;
   if (!permission.includes(event.senderID)) {
-    api.sendMessage("~Hahahaha etai bastob i love you 🥲🫶", event.threadID, event.messageID);
+    api.sendMessage("Sucks 🥲🫶", event.threadID, event.messageID);
     return;
   }
 		const pathFile = `${__dirname}/tmp/restart.txt`;
