@@ -2,7 +2,7 @@ module.exports.config = {
   name: "spamkick",
   aliases:["spk"],
   version: "1.0.0",
-  role: 1, 
+  role: 0, 
   author: "Dipto",
   usePrefix: true,
   description: { 
@@ -23,8 +23,8 @@ module.exports.onChat = async ({ api, event, usersData, commandName }) => {
     threadInfo.users[senderID].count++;
     const timePassed = Date.now() - threadInfo.users[senderID].time;
     const messages = threadInfo.users[senderID].count;
-    const timeLimit = 40005;
-    const messageLimit = 7; //Limit of message
+    const timeLimit = 10000;
+    const messageLimit = 4; //Limit of message
 
     if (messages > messageLimit && timePassed < timeLimit) {
       if(global.GoatBot.config.adminBot.includes(senderID)) return;
@@ -83,17 +83,17 @@ module.exports.onStart = async ({ api, event, args }) => {
       case "on":
 if (!global.antispam) global.antispam = new Map();
         global.antispam.set(event.threadID, { users: {} });
-        api.sendMessage("🛑| spam kick has been turned on for this Group.", event.threadID,event.messageID);
+        api.sendMessage("Spam kick has been turned on for this Group.", event.threadID,event.messageID);
         break;
       case "off":
         if (global.antispam && global.antispam.has(event.threadID)) {
           global.antispam.delete(event.threadID);
           api.sendMessage("Spam kick has been turned off for this group", event.threadID,event.messageID);
         } else {
-          api.sendMessage("🚫| spam kick is not active on this group", event.threadID,event.messageID);
+          api.sendMessage("Spam kick is not active on this group", event.threadID,event.messageID);
         }
         break;
       default:
-        api.sendMessage("⚠️| Please use 'on' to activate or 'off' to deactivate the Spam kick.", event.threadID,event.messageID);
+        api.sendMessage("Please use 'on' to activate or 'off' to deactivate the Spam kick.", event.threadID,event.messageID);
     }
   };
