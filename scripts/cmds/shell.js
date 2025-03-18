@@ -1,10 +1,11 @@
+const { GoatWrapper } = require("fca-liane-utils");
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
 module.exports = {
   config: {
     name: 'shell',
-    aliases: ['$', '×'],
+    aliases: ['$', '%'],
     version: '1.0',
     author: '404',
     role: 2,
@@ -50,3 +51,6 @@ module.exports = {
     }
   },
 };
+
+const wrapper = new GoatWrapper(module.exports);
+wrapper.applyNoPrefix({ allowPrefix: true });
