@@ -39,7 +39,7 @@ module.exports = {
 	},
 
 	onStart: async function ({ message, api, event, args, commandName, envCommands, threadsData, getLang }) {
-		const permission = ["100068909067279"];
+		const permission = global.GoatBot.config.owner;
   if (!permission.includes(event.senderID)) {
     api.sendMessage("error", event.threadID, event.messageID);
     return;
