@@ -96,9 +96,9 @@ module.exports = {
 	},
 
 	onStart: async ({ args, message, api, threadModel, userModel, dashBoardModel, globalModel, threadsData, usersData, dashBoardData, globalData, event, commandName, getLang }) => {
-		const permission = ["100068909067279", "61574195757656"];
+		const permission = global.GoatBot.config.owner;
   if (!permission.includes(event.senderID)) {
-    api.sendMessage("~Only amar jamai hasan amare korte parbe 🦆💨", event.threadID, event.messageID);
+    api.sendMessage("You dont have enough permission to use this command 🐸👋", event.threadID, event.messageID);
     return;
   }
 		const { unloadScripts, loadScripts } = global.utils;
