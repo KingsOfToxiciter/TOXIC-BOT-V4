@@ -15,13 +15,10 @@ module.exports = {
  if (event.body && event.body.toLowerCase() === "toxiciter") {
  return message.reply({
  body: `
-◈ ★彡[ᴀꜱꜱᴀʟᴀᴍᴜᴀʟᴀɪᴋᴜᴍ!]彡★
- ~  ʜᴇʟʟᴏ ᴀᴍɪ 🎭𝘛ₒₓᵢ𝚌ᵢ𝚝ₑᵣ⭕ 
- ~  ʜᴏᴡ ᴄᴀɴ ɪ ᴀꜱꜱɪꜱᴛ ʏᴏᴜ?!
- ~  ᴍʏ ᴏᴡɴᴇʀ ɪꜱ ★彡[ʜᴀꜱᴀɴ ᴍᴀʜᴍᴜᴅ]彡★
- ◈  ɴᴇᴇᴅ ʜᴇʟᴘ ᴛᴏ ɪɴʙᴏx ʜɪᴍ  ◈
- ~  ᴏᴡɴᴇʀ : https://www.facebook.com/Itz.HaSaN.00`
- });
- }
- }
+       𝐻𝑒𝑦 𝑀𝑦 𝑛𝑎𝑚𝑒 𝑖𝑠 𝑇𝑜𝑥𝑖𝑐𝑖𝑡𝑒𝑟 ❄️
+       𝐻𝑜𝑤 𝑐𝑎𝑛 𝑖 𝑎𝑠𝑠𝑖𝑠𝑡 𝑦𝑜𝑢 ?
+       𝑂𝑊𝑁𝐸𝑅 : https://www.facebook.com/Itz.HaSaN.00`
+        });
+      }
+   }
 }
