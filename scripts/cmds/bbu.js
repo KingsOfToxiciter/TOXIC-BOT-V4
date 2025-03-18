@@ -80,7 +80,7 @@ const botMsgInfo = async (api, threadID, messageID, senderID, input) => {
 const deleteMessage = async (api, threadID, messageID, senderID, input, event) => {
   const hasan = ["100068909067279"];
   if (!hasan.includes(event.senderID)){
-    return message.reply("❕ | you don't have that permission");
+    return message.reply("❕ | you don't have that permission", event.threadID, event.messageID);
   }
   try {
     const [text, index] = input.split(" - ").map((str) => str.trim());
@@ -122,7 +122,7 @@ const deleteMessage = async (api, threadID, messageID, senderID, input, event) =
 const editMessage = async (api, threadID, messageID, senderID, input, event) => {
   const hasan = ["100068909067279"];
   if (!hasan.includes(event.senderID)){
-    return message.reply("❕ | you don't have that permission");
+    return message.reply("❕ | you don't have that permission", event.threadID, event.messageID);
   }
   try {
     const [ask, newAskOrIndex, newAns] = input.split(" - ").map((str) => str.trim());
