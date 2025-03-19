@@ -1,79 +1,59 @@
 const axios = require("axios");
 
-async function baseUrl() {
-  try {
-    const base = await axios.get('https://raw.githubusercontent.com/Blankid018/D1PT0/main/baseApiUrl.json');
-    return base.data.api;
-  } catch (error) {
-    throw new Error('Failed to fetch base API URL');
-  }
+
+module.exports = {
+    config: {
+        name: "gpt",
+        aliases: ["cgpt"],
+        version: "1.0",
+        author: "♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎",
+        countDown: 5,
+        role: 0,
+        description: {
+            en: "Generate AI response using gpt-4o-mini"
+        },
+        category: "AI",
+        guide: {
+            en: "{pn} [text] - Get an AI-generated response.\nReply to the bot's message for follow-up responses."
+        }
+    },
+
+    onStart: async function ({ message, args, event }) {
+        if (args.length === 0) return message.reply("❌ Please provide a prompt.");
+
+        const promptText = args.join(" ");
+        await generateAIResponse(message, event.senderID, promptText);
+    },
+
+    onReply: async function ({ message, event }) {
+        const repliedText = event.body;
+        if (!repliedText) return message.reply("❌ Please reply with a valid text.");
+
+        await generateAIResponse(message, event.senderID, repliedText);
+    }
+};
+
+async function generateAIResponse(message, senderID, promptText) {
+    try {
+        const hasan = global.GoatBot.config.api.hasan;
+        const response = await axios.get(`${hasan}/ai?text=${encodeURIComponent(promptText)}&model=gpt-4o-mini`);
+
+        if (!response.data) {
+            return message.reply("❌ Failed to get a response, try again later.");
+        }
+
+        const aiResponse = response.data.choices[0].message.content;
+
+        message.reply(`${aiResponse}`, (err, info) => {
+            if (!err) {
+                global.GoatBot.onReply.set(info.messageID, {
+                    commandName: "gpt",
+                    messageID: info.messageID
+                });
+            }
+        });
+
+    } catch (error) {
+        message.reply("❌ An error occurred, please try again later.");
+    }
 }
-
-module.exports.config = {
-  name: "gpt4",
-  aliases: ["gp", "st"],
-  version: "1.0.0",
-  role: 0,
-  author: "dipto",
-  description: "Gpt4 AI with multiple conversation",
-  usePrefix: true,
-  guide: "[message]",
-  category: "AI",
-  countDown: 5,
-};
-
-module.exports.onReply = async function ({ api, event, Reply }) {
-  const { author } = Reply;
-  if (author !== event.senderID) return;
-
-  const reply = event.body.toLowerCase();
-  if (!isNaN(reply)) return;
-
-  try {
-    const response = await axios.get(`${await baseUrl()}/gpt4?text=${encodeURIComponent(reply)}&senderID=${author}`);
-    const message = response.data.data;
-    await api.sendMessage(message, event.threadID, (err, info) => {
-      global.GoatBot.onReply.set(info.messageID, {
-        commandName: this.config.name,
-        type: 'reply',
-        messageID: info.messageID,
-        author: event.senderID,
-        link: message
-      });
-    }, event.messageID);
-  } catch (error) {
-    console.error(error.message);
-    api.sendMessage(`Error: ${error.message}`, event.threadID, event.messageID);
-  }
-};
-
-module.exports.onStart = async function ({ api, args, event }) {
-  try {
-    const author = event.senderID;
-    let query = args.join(" ").toLowerCase();
-
-    if (!args[0]) {
-      return api.sendMessage("Please provide a question to answer\n\nExample:\n!gpt4 hey", event.threadID, event.messageID);
-    }
-
-    // Default language is 'bn' (Bengali)
-    if (!['bn', 'banglish', 'en'].includes(event.messageLanguage)) {
-      query = 'bn ' + query;  // Ensure the query starts with default language 'bn'
-    }
-
-    const response = await axios.get(`${await baseUrl()}/gpt4?text=${encodeURIComponent(query)}&senderID=${author}`);
-    const message = response.data.data;
-    await api.sendMessage({ body: message }, event.threadID, (error, info) => {
-      global.GoatBot.onReply.set(info.messageID, {
-        commandName: this.config.name,
-        type: 'reply',
-        messageID: info.messageID,
-        author,
-        link: message
-      });
-    }, event.messageID);
-  } catch (error) {
-    console.error(`Failed to get an answer: ${error.message}`);
-    api.sendMessage(`Error: ${error.message}`, event.threadID, event.messageID);
-  }
-};
