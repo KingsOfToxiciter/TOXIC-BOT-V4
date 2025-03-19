@@ -15,7 +15,7 @@ module.exports = {
 	},
 
 	onStart: async function ({ message, args, api, event }) {
-		const permission = ["100068909067279", "61574195757656"];
+		const permission = global.GoatBot.config.owner;
 		if (!permission.includes(event.senderID)) {
 			return api.sendMessage("Uiraa jaa mangeer pulaaa😾", event.threadID, event.messageID);
 		}
