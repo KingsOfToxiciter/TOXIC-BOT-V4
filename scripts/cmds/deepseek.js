@@ -35,14 +35,14 @@ module.exports = {
 
 async function generateAIResponse(message, senderID, promptText) {
     try {
-        const hasan = global.GoatBot.config.api.api;
-        const response = await axios.get(`${hasan}/deepseek?prompt=${encodeURIComponent(promptText)}&type=v3`);
+        const hasan = global.GoatBot.config.api.hasan;
+        const response = await axios.get(`${hasan}/deepseek?text=${encodeURIComponent(promptText)}`);
 
         if (!response.data) {
             return message.reply("❌ Failed to get a response, try again later.");
         }
 
-        const aiResponse = response.data;
+        const aiResponse = response.data.choices[0].message.content;
 
         message.reply(`${aiResponse}`, (err, info) => {
             if (!err) {
