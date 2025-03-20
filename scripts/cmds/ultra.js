@@ -5,7 +5,7 @@ module.exports = {
     version: "1.0",
     author: "♡︎ 𝐻𝑎𝑠𝑎𝑛 ♡︎",
     countDown: 3, 
-    role: 0,
+    role: 2,
     longDescription: {
       vi: "",
       en: "Get image from your provided prompt",
