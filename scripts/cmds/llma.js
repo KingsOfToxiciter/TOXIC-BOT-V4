@@ -4,7 +4,7 @@ const axios = require("axios");
 module.exports = {
     config: {
         name: "llma",
-        aliases: ["ai"],
+        aliases: [],
         version: "1.0",
         author: "♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎",
         countDown: 5,
