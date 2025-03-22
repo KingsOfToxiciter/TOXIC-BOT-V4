@@ -1,10 +1,4 @@
 const axios = require("axios");
-const baseApiUrl = async () => {
-  const base = await axios.get(
-    `https://raw.githubusercontent.com/Blankid018/D1PT0/main/baseApiUrl.json`,
-  );
-  return base.data.api;
-};
 
 module.exports = {
   config: {
@@ -78,15 +72,14 @@ module.exports = {
 
   onStart: async function ({ api, args, event,threadsData }) {
     try {
+        const hasan = global.GoatBot.config.api.hasan;
       if (!args[0]) {
-        const response = await axios.get(
-          `${await baseApiUrl()}/flagGame?randomFlag=random`,
-        );
-        const { link, country } = response.data;
+        const response = await axios.get(`${hasan}/flag`);
+        const { flag, country } = response.data;
         await api.sendMessage(
           {
-            body: "Guess this flag name.",
-            attachment: await global.utils.getStreamFromURL(link),
+            body: "Guess this flag name.🏌️😷",
+            attachment: await global.utils.getStreamFromURL(flag),
           },
           event.threadID,
           (error, info) => {
@@ -95,7 +88,7 @@ module.exports = {
               type: "reply",
               messageID: info.messageID,
               author: event.senderID,
-              link,
+              flag,
               country,
               attempts: 0,
             });
