@@ -8,7 +8,7 @@ module.exports = {
         author: "♡ 𝐻𝐴𝑆𝐴𝑁 ♡",
         shortDescription: "imgur upload",
         countDown: 0,
-        category: "imgur",
+        category: "tools",
         guide: {
             en: '[reply to image]'
         }
