@@ -2,15 +2,15 @@ const axios = require('axios');
 
 module.exports = {
   config: {
-    name: "fun2",
-    aliases: ["fun2.0"],
+    name: "fun",
+    aliases: ["fun"],
     version: "2.0",
     author: "kshitiz",
     countDown: 20,
     role: 0,
     shortDescription: "",
     longDescription: "bot will send you random video to entertain you",
-    category: "𝗙𝗨𝗡",
+    category: "fun",
     guide: "{pn}",
   },
 
