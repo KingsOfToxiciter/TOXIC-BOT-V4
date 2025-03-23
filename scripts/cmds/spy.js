@@ -14,7 +14,7 @@ module.exports = {
     role: 0,
     author: "Dipto",
     Description: "Get user information and profile photo",
-    category: "information",
+    category: "info",
     countDown: 10,
   },
 
