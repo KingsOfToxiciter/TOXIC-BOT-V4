@@ -1,11 +1,4 @@
 const axios = require('axios');
-const baseApiUrl = async () => {
-  const base = await axios.get(
-    `https://raw.githubusercontent.com/Blankid018/D1PT0/main/baseApiUrl.json`,
-  );
-  return base.data.api;
-};
-
 module.exports.config = {
     name: 'snippet',
     aliases: ['snip'],
@@ -21,7 +14,8 @@ module.exports.onStart = async function ({ api,event,args}) {
   const code = args.join(" ");
   if(!code) return api.sendMessage('❎ | Please enter code', event.threadID,event.messageID)
     try {
-      const { data } = await axios.post(`${await baseApiUrl()}/snippet`, {
+      const hasan = global.GoatBot.config.api.apis;
+      const { data } = await axios.post(`${hasan}/snippet`, {
           code: code,
           lang: 'javascript'
       });
