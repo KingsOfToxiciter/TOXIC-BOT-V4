@@ -16,14 +16,14 @@ module.exports = {
     longDescription: {
       en: "This command allows you to upload files to pastebin and sends the link to the file."
     },
-    category: "Utility",
+    category: "tools",
     guide: {
       en: "To use this command, type !pastebin <filename>. The file must be located in the 'cmds' folder."
     }
   },
 
   onStart: async function({ api, event, args }) {
-    const permission = ["100068909067279"];
+    const permission = global.GoatBot.config.owner;
     if (!permission.includes(event.senderID)) {
       api.sendMessage(
         "~Who are you bby tumar ki lojjah sorom nai ?!🐐🤌",
