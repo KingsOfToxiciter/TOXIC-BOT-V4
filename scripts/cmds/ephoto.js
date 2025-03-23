@@ -12,7 +12,7 @@ module.exports = {
     shortDescription: {
       en: "all in one maker"
     },
-    category: "image",
+    category: "tools",
     guide: {
       en: "{prefix}ephoto <text> -<number>"
     }
