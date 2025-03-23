@@ -5,7 +5,7 @@ module.exports = {
     author: "♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎",
     shortDescription: { en: "Slot game" },
     longDescription: { en: "Advanced Slot game with jackpot feature." },
-    category: "Game",
+    category: "game",
   },
   langs: {
     en: {
