@@ -15,7 +15,7 @@ module.exports = {
 		   longDescription: {
 			en: "Add, remove or see the admin list for this bot"
 		},
-        category: "management",
+        category: "admin",
         guide: {
             en: "   {pn} [list | -l]: Show admin list (everyone can use)\n" +
                 "   {pn} [add | -a] <uid | @tag>: Add admin role for a user (admins only)\n" +
