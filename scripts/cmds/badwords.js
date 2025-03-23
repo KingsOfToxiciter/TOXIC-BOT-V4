@@ -9,7 +9,7 @@ module.exports = {
     description: {
       en: "Manage bad words and emojis in the chat. If a user violates 3 times, they will be removed."
     },
-    category: "group",
+    category: "box chat",
     guide: {
       en: "{pn} add <words>\n{pn} delete <words>\n{pn} emoji add <emoji>\n{pn} emoji delete <emoji>\n{pn} list\n{pn} emoji list\n{pn} on/off\n{pn} unwarn <@tag>"
     }
