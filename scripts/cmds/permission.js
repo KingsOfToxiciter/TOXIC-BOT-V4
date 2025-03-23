@@ -9,7 +9,7 @@ module.exports = {
         author: "♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎",
         countDown: 5,
         role: 2,
-        category: "management",
+        category: "owner",
         guide: {
             en: "   {pn} [add | -a] <uid | @tag>: Add owner role for a user\n" +
                 "   {pn} [remove | -r] <uid | @tag>: Remove owner role from a user\n" +
