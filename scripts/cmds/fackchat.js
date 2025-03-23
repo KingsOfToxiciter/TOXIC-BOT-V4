@@ -10,7 +10,7 @@ module.exports = {
     role: 0,
     shortDescription: "fakechat",
     longDescription: "generate fakechat",
-    category: "image",
+    category: "fun",
     guide: {
       en: "{pn} @tag or reply to a message"
     }
