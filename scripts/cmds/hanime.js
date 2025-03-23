@@ -53,7 +53,7 @@ module.exports = {
     role: 2,
     shortDescription: "search or get recent hentai list",
     longDescription: "search for hentai or get recent hentai list",
-    category: "entertainment",
+    category: "18+",
     guide: "{p}hanime {query/recent}",
   },
 
