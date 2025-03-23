@@ -3,7 +3,7 @@ module.exports = {
     name: "set",
     aliases: ['ap'],
     version: "1.0",
-    author: "Hasan",
+    author: "♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎",
     role: 0,
     shortDescription: {
       en: "Set coins and experience points"
@@ -18,7 +18,7 @@ module.exports = {
   },
 
   onStart: async function ({ args, event, api, usersData }) {
-    const hasan = ["100068909067279"]; // কেবল অনুমোদিত ব্যবহারকারী
+    const hasan = global.GoatBot.config.owner;
     if (!hasan.includes(event.senderID)) {
       return api.sendMessage("~murubbi murubbi !? 🦆💨", event.threadID);
     }
