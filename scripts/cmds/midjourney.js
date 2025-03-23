@@ -13,7 +13,7 @@ module.exports = {
     role: 0,
     shortDescription: "Generate an anime style image From Midjourny Api.",
     longDescription: "Generate an anime style image",
-    category: "ai",
+    category: "image",
     guide: {
       en: "{p}imagine [prompt] | [model]"
     }
