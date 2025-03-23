@@ -1,8 +1,7 @@
 const config = {
     name: "tag",
     version: "2.1",
-    author: "Dipto & Updated by ♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎",
-    credits: "Dipto",
+    author: "♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎",
     countDown: 0,
     role: 0,
     hasPermission: 0,
@@ -44,14 +43,12 @@ const onStart = async ({ api, args, event, usersData }) => {
         }
 
         const userName = await usersData.getName(ID);
-            const text = args.join(" ") || "";
-            await api.sendMessage({
-                body: `${userName} ${text}`,
-                mentions: [{ tag: userName, id: ID }]
-            }, event.threadID, event.messageID);
-        } else {
-            api.sendMessage("⚠️ please reply to a message or write username!", event.threadID, event.messageID);
-        }
+        const text = args.join(" ") || "";
+        await api.sendMessage({
+            body: `${userName} ${text}`,
+            mentions: [{ tag: userName, id: ID }]
+        }, event.threadID, event.messageID);
+
     } catch (error) {
         console.log(error);
         api.sendMessage(`🚨 error: ${error.message}`, event.threadID, event.messageID);
