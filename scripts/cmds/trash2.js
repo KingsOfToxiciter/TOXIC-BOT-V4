@@ -10,7 +10,7 @@ module.exports = {
     role: 0,
     shortDescription: "",
     longDescription: "",
-    category: "meme",
+    category: "fun",
     guide: {
       vi: "{pn} [@tag | để trống]",
       en: ""
