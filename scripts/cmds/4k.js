@@ -10,7 +10,7 @@ module.exports.config = {
     longDescription: {
         en: "enhanced your images"
     },
-    category: "enhanced",
+    category: "tools",
     guide: {
         en: "{pn} reply to an image for enhance"
     } 
