@@ -10,7 +10,7 @@ module.exports.config = {
     longDescription: {
         en: "background remove your images"
     },
-    category: "removebg",
+    category: "tools",
     guide: {
         en: "{pn} reply to an image for background remove"
     } 
