@@ -13,7 +13,7 @@ module.exports = {
     description: {
       en: "Download video from given URL.",
     },
-    category: "MEDIA",
+    category: "media",
     guide: {
       en: "[song_name]",
     },
