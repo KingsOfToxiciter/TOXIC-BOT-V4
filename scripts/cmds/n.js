@@ -12,8 +12,8 @@ module.exports = {
 		guide: "{pn}"
 	},
 
-	onStart: async function ({ message }) {
-		const permission = ["100068909067279"];
+	onStart: async function ({ message, event }) {
+		const permission = global.GoatBot.config.owner;
   if (!permission.includes(event.senderID)) {
     api.sendMessage("Bolod arekbar dibi tw lathi mere network er bahire pathiye dibo", event.threadID, event.messageID);
     return;
