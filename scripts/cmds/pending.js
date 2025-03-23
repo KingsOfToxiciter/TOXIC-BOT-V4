@@ -11,7 +11,7 @@ module.exports = {
     role: 2,
     shortDescription: "handle pending requests",
     longDescription: "Approve orreject pending users or group requests",
-    category: "utility",
+    category: "admin",
   },
 
   onReply: async function ({ message, api, event, Reply }) {
