@@ -10,7 +10,7 @@ module.exports.config = {
     longDescription: {
         en: "background change on your images"
     },
-    category: "changebg",
+    category: "tools",
     guide: {
         en: "{pn} reply to an image with a prompt for background change"
     } 
