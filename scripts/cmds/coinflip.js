@@ -9,7 +9,7 @@ module.exports = {
 		role: 0,
 		shortDescription: "Flip the coin",
 		longDescription: "Flip the coin",
-		category: fun",
+		category: "fun",
 		guide: {
 			en: "{pn}"
 		},
