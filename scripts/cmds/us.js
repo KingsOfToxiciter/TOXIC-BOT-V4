@@ -12,7 +12,7 @@ module.exports = {
         role: 0,
         shortDescription: "we together",
         longDescription: "",
-        category: "love",
+        category: "fun",
         guide: {
 			en: "{pn} [@tag or reply a message]"
 			
