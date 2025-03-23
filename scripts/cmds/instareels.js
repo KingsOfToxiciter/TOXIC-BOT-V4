@@ -20,7 +20,7 @@ module.exports = {
     longDescription: {
       en: "View Instagram reels by providing a hashtag and reply with the reel list by number",
     },
-    category: "FUN",
+    category: "media",
     guide: {
       en: "{p}reels [hashtag]",
     },
