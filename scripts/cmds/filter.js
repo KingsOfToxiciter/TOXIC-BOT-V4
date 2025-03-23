@@ -10,7 +10,7 @@ module.exports = {
     author: "vex_Kshitiz",
     shortDescription: "Apply filters to images",
     longDescription: "Apply various filters to images.",
-    category: "image",
+    category: "tools",
     guide: {
       en: "{p}filter [filterNumber]"
     }
