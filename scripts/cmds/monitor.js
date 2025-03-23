@@ -11,7 +11,7 @@ module.exports = {
     role: 0,
     shortDescription: { en: "Displays the bot's uptime and ping." },
     longDescription: { en: "Find out how long the bot has been tirelessly serving you and its current ping." },
-    category: "owner",
+    category: "system",
     guide: { en: "Use {p}monitor to reveal the bot's uptime and ping." }
   },
   onStart: async function ({ api, event, args }) {
