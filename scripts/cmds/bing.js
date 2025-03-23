@@ -6,7 +6,7 @@ module.exports = {
   config: {
     name: "bing",
     author: "Noobs Romim",
-    category: "image generator"
+    category: "image"
   },
   onStart: async ({ args, message, api, event }) => {
     const prompt = args.join(" ");
