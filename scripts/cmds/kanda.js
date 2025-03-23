@@ -1,7 +1,7 @@
 module.exports = {
   config: {
-    name: "kanda2",
-    aliases: ["kanda2.0"],
+    name: "kanda",
+    aliases: ["haram"],
     version: "2.0",
     author: "kshitiz",
     countDown: 0,
@@ -15,7 +15,7 @@ module.exports = {
   sentVideos: [],
 
   onStart: async function ({ api, event, message }) {
-    const permission = ["100068909067279"];
+    const permission = global.GoatBot.config.owner;
   if (!permission.includes(event.senderID)) {
     api.sendMessage("Ki cmd diccho nosto chele?!", event.threadID, event.messageID);
     return;
