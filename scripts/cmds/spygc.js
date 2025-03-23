@@ -11,7 +11,7 @@ module.exports = {
     role: 2,
     shortDescription: "Spy the group chats that bot is in.",
     longDescription: "",
-    category: "box",
+    category: "info",
     guide: {
       en: "{p}{n} reply by number",
     },
