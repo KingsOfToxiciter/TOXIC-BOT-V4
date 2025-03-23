@@ -39,24 +39,21 @@ module.exports = {
 		}) {
 
 
-			let uid1 = null,
-						uid2 = null;
+			let uid1 = event.senderID;
+			let	uid2 = event.messageReply.senderID;
 				const input = args.join(" ");
+     if (event.type === "message_reply")
 				if (event.mentions && Object.keys(event.mentions).length === 2) {
 						uid1 = Object.keys(event.mentions)[0];
 						uid2 = Object.keys(event.mentions)[1];
 				} else if (event.mentions && Object.keys(event.mentions).length === 1) {
-						uid1 = event.senderID;
 						uid2 = Object.keys(event.mentions)[0];
 				} else {
 						return message.reply("Please mention one or two users to send a hug gif.");
 				}
 
-			
-				const userInfo1 = await api.getUserInfo(uid1);
-				const userInfo2 = await api.getUserInfo(uid2);
-				const userName1 = userInfo1[uid1].name.split(' ').pop();
-				const userName2 = userInfo2[uid2].name.split(' ').pop();
+				const userName1 = await usersData.getName(uid1);
+				const userName2 = await usersData.getName(uid2);
 
 				const apiUrl = "https://nekos.best/api/v2/hug?amount=1";
 				axios
