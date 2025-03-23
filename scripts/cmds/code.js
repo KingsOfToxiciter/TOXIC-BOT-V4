@@ -1,11 +1,5 @@
 const fs = require("fs");
 const request = require("request");
-const baseApiUrl = async () => {
-  const base = await require("axios").get(
-    `https://raw.githubusercontent.com/Blankid018/D1PT0/main/baseApiUrl.json`,
-  );
-  return base.data.api;
-};
 
 module.exports.config = {
   name: "code",
@@ -20,7 +14,7 @@ module.exports.config = {
 };
 
 module.exports.onStart = async function ({ api, event, args }) {
-  const admin = ["your uid here"];
+  const admin = global.GoatBot.config.owner;
   const fileName = args[0];
   if (!admin.includes(event.senderID)) {
     api.sendMessage(
@@ -39,8 +33,9 @@ module.exports.onStart = async function ({ api, event, args }) {
       code = await fs.promises.readFile(path, "utf-8");
     }
     const en = encodeURIComponent(code);
+    const hasan = global.GoatBot.config.api.apis;
     const options = {
-      url: `${await baseApiUrl()}/paste`,
+      url: `${hasan}/paste`,
       method: "POST",
       json: true,
       body: {
