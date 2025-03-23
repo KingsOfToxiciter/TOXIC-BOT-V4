@@ -39,25 +39,7 @@ module.exports = {
 		}) {
 
 
-			const { getPrefix } = global.utils;
-			 const p = getPrefix(event.threadID);
-		const approvedmain = JSON.parse(fs.readFileSync(`${__dirname}/assist_json/approved_main.json`));
-		const bypassmain = JSON.parse(fs.readFileSync(`${__dirname}/assist_json/bypass_id.json`));
-		const bypassmUid = event.senderID;
-		if (bypassmain.includes(bypassmUid)) {
-			console.log(`User ${bypassmUid} is in bypass list. Skipping the main approval check.`);
-		} else {
-			const threadmID = event.threadID;
-			if (!approvedmain.includes(threadmID)) {
-				const msgSend = message.reply(`cmd 'hug' is locked 🔒...\n Reason : Bot's main cmd \nyou need permission to use all main cmds.\n\nType ${p}requestMain to send a request to admin`);
-				setTimeout(async () => {
-					message.unsend((await msgSend).messageID);
-				}, 40000);
-				return;
-			}
-		}  
-
-				let uid1 = null,
+			let uid1 = null,
 						uid2 = null;
 				const input = args.join(" ");
 				if (event.mentions && Object.keys(event.mentions).length === 2) {
@@ -70,12 +52,7 @@ module.exports = {
 						return message.reply("Please mention one or two users to send a hug gif.");
 				}
 
-			if ((uid1 === '100081658294585' || uid2 === '100081658294585') && (uid1 !== '100010335499038' && uid2 !== '100010335499038')) {
-	uid1 = '100010335499038';
-	uid2 = '100081658294585';
-	message.reply("sorry🥱💁\n\nI only hug SiAM 😌💗");
-							}
-
+			
 				const userInfo1 = await api.getUserInfo(uid1);
 				const userInfo2 = await api.getUserInfo(uid2);
 				const userName1 = userInfo1[uid1].name.split(' ').pop();
