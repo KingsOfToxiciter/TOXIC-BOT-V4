@@ -9,7 +9,7 @@ module.exports = {
     role: 2,
     shortDescription: 'store of cmds',
     longDescription: 'store of cmds all  made by kshitiz',
-    category: 'utility',
+    category: 'goatbot',
     guide: {
       en: 'To view commands: {p}cmdstore\nTo paginate: {p}cmdstore {page}\nTo search: {p}cmdstore {search}'
     }
