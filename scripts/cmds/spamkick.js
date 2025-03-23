@@ -2,13 +2,13 @@ module.exports.config = {
   name: "spamkick",
   aliases:["spk"],
   version: "1.0.0",
-  role: 0, 
+  role: 1, 
   author: "Dipto",
   usePrefix: true,
   description: { 
       en: "Automatically kick a user who spams messages in a group chat"
   },
-  category: "group",
+  category: "box chat",
   guide: { en:"[on/off] or [settings]"},
   countDown: 5
 };
