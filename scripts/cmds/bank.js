@@ -22,7 +22,7 @@ module.exports = {
 
     },
 
-    category: "💰 Economy",
+    category: "economy",
 
     countDown: 15,
 
