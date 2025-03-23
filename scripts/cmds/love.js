@@ -131,7 +131,7 @@ const loveCalculator = {
       longDescription: {
         en: "calculate love percentage",
       },
-      category: "𝗙𝗨𝗡",
+      category: "fun",
       guide: {
         en: "{p}{n} to calculate love percentage",
       },
