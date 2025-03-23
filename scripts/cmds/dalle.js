@@ -14,7 +14,7 @@ const baseApiUrl = "https://www.noobs-api.rf.gd/dipto";
     prefix: true,
     description: "Generate images by Unofficial Dalle3",
     category: "Image Generator",
-    commandCategory: "Image Generator",
+    commandCategory: "image",
     guide: { en: "{pn} prompt" },
     usages: "/dalle cat"
   };
