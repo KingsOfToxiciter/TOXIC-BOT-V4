@@ -9,7 +9,7 @@ module.exports = {
     version: "1.0",
     author: "Vex_Kshitiz",
     shortDescription: "gays finder.",
-    category: "Fun",
+    category: "fun",
     guide: "{p}gayfinder",
   },
 
