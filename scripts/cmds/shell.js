@@ -9,7 +9,7 @@ module.exports = {
     version: '1.0',
     author: '404',
     role: 2,
-    category: 'utility',
+    category: 'owner',
     shortDescription: {
       en: 'Executes terminal commands.',
     },
