@@ -16,7 +16,7 @@ module.exports = {
 		longDescription: {
 			en: "japnese anya text to speech"
 		},
-		category: "𝗔𝗜",
+		category: "tools",
 		guide: {
 			en: "{p}{n} japn [text]"
 		}
