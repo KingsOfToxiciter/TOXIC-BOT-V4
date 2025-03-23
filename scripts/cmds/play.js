@@ -73,14 +73,14 @@ async function handleAudioCommand(api, event, args, message) {
 
 module.exports = {
     config: {
-        name: "surah",
+        name: "play",
         version: "1.0",
         author: "Vex_Kshitiz",
         countDown: 10,
         role: 0,
         shortDescription: "Download and send audio from YouTube.",
         longDescription: "Download audio from YouTube based on a query or attachment.",
-        category: "music",
+        category: "media",
         guide: "{p}audio [query] or reply to a video/audio attachment",
     },
     onStart: function ({ api, event, args, message }) {
