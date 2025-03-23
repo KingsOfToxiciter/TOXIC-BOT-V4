@@ -7,13 +7,13 @@ const config = {
     role: 0,
     hasPermission: 0,
     description: "Tag user by reply, mention, or name",
-    category: "tag",
+    category: "box chat",
     commandCategory: "tag",
     guide: "{pn} [reply/mention/name]",
     usages: "reply, mention, or search by name"
 };
 
-const onStart = async ({ api, args, event }) => {
+const onStart = async ({ api, args, event, usersData }) => {
     try {
         let ID;
         if (event.messageReply) {
@@ -43,9 +43,7 @@ const onStart = async ({ api, args, event }) => {
             ID = event.senderID;
         }
 
-        const mentionedUser = await api.getUserInfo(ID);
-        if (mentionedUser && mentionedUser[ID]) {
-            const userName = mentionedUser[ID].name;
+        const userName = await usersData.getName(ID);
             const text = args.join(" ") || "";
             await api.sendMessage({
                 body: `${userName} ${text}`,
