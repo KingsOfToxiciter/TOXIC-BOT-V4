@@ -4,8 +4,8 @@ const path = require("path");
 
 module.exports = {
   config: {
-    name: "song",
-    aliases: ["gan", "surah"],
+    name: "play",
+    aliases: ["gan"],
     version: "1.0",
     author: "♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎",
     countDown: 2,
