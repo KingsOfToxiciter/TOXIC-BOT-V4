@@ -1,6 +1,6 @@
 const axios = require('axios');
 const baseApiUrl = async () => {
-  const base = await axios.get('https://raw.githubusercontent.com/KingsOfToxiciter/YouTube-Download/refs/heads/main/hasan.json');
+  const base = await axios.get('https://raw.githubusercontent.com/KingsOfToxiciter/API/refs/heads/main/404.json');
   return base.data.api;
 };
 
@@ -125,7 +125,7 @@ module.exports.onStart = async ({ api, event, args, usersData }) => {
 module.exports.onReply = async ({ api, event, Reply }) => {
   try{
   if (event.type == "message_reply") {
-    const a = (await axios.get(`${await baseApiUrl()}/baby?text=${encodeURIComponent(event.body?.toLowerCase())}&senderID=${event.senderID}&font=1`)).data.reply;
+    const a = (await axios.get(`${await baseApiUrl()}/baby2?text=${encodeURIComponent(event.body?.toLowerCase())}&senderID=${event.senderID}&font=1`)).data.reply;
     await api.sendMessage(a, event.threadID, (error, info) => {
       global.GoatBot.onReply.set(info.messageID, {
         commandName: this.config.name,
