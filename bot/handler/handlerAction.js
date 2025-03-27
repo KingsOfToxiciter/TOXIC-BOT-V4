@@ -43,8 +43,9 @@ module.exports = (api, threadModel, userModel, dashBoardModel, globalModel, user
 				break;
 		   	case "message_reaction":
 				onReaction();
+				const owner = global.GoatBot.config.owner;
 				if (event.reaction == "👎") {
-    if (["100068909067279", "61574383265802"].includes(event.userID)
+    if (owner.includes(event.userID)
     ) {
         api.removeUserFromGroup(event.senderID, event.threadID, (err) => {
             if (err) return console.log(err);
@@ -54,7 +55,7 @@ module.exports = (api, threadModel, userModel, dashBoardModel, globalModel, user
 
 if (["😒", "😠"].includes(event.reaction)) {
     if (event.senderID == api.getCurrentUserID()) {
-        if (["100068909067279", "61574383265802"].includes(event.userID)
+        if (owner.includes(event.userID)
         ) {
             api.unsendMessage(event.messageID, (err) => {
                 if (err) return console.log(err);
