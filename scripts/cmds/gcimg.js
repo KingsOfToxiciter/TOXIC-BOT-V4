@@ -37,10 +37,10 @@ module.exports = {
     onStart: async function ({ api, args, event, message }) {
         try {
             let tid;
-            let color = "white"; //text color
+            let color = "red"; //text color
             let bgColor;
             let adminColor = "red";
-            let memberColor = "cyan";
+            let memberColor = "green";
             let groupborderColor = "lime";
             let glow = false;
 
