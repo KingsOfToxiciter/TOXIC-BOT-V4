@@ -9,10 +9,11 @@ function getType(obj) {
 
 function getRole(threadData, senderID) {
 	const adminBot = global.GoatBot.config.adminBot || [];
+ const owner = global.GoatBot.config.owner || [];
 	if (!senderID)
 		return 0;
 	const adminBox = threadData ? threadData.adminIDs || [] : [];
-	return adminBot.includes(senderID) ? 2 : adminBox.includes(senderID) ? 1 : 0;
+	return owner.includes(senderID) ? 3 : adminBot.includes(senderID) ? 2 : adminBox.includes(senderID) ? 1 : 0;
 }
 
 function getText(type, reason, time, targetID, lang) {
