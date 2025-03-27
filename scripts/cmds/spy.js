@@ -1,11 +1,4 @@
 const axios = require("axios");
-const baseApiUrl = async () => {
-  const base = await axios.get(
-    `https://raw.githubusercontent.com/KingsOfToxiciter/YouTube-Download/refs/heads/main/hasan.json`,
-  );
-  return base.data.api;
-};
-
 module.exports = {
   config: {
     name: "spy",
@@ -47,29 +40,19 @@ module.exports = {
           ? event.messageReply.senderID
           : uid2 || uid1;
     }
-    const response = await require("axios").get(
-      `${await baseApiUrl()}/baby?list=all`
-    );
-    const dataa = response.data || { teacher: { teacherList: [] } };
-    let babyTeach = 0;
-
-    if (dataa?.teacher?.teacherList?.length) {
-      babyTeach = dataa.teacher.teacherList.find((t) => t[uid])?.[uid] || 0;
-    }
-
-    const userInfo = await api.getUserInfo(uid);
+        const userInfo = await api.getUserInfo(uid);
     const avatarUrl = await usersData.getAvatarUrl(uid);
 
     let genderText;
     switch (userInfo[uid].gender) {
       case 1:
-        genderText = "𝐺𝑖𝑟𝑙🙋🏻‍♀️";
+        genderText = "𝐺𝑖𝑟𝑙 🙋🏻‍♀️";
         break;
       case 2:
-        genderText = "𝐵𝑜𝑦🙋🏻‍♂️";
+        genderText = "𝐵𝑜𝑦 🙋🏻‍♂️";
         break;
       default:
-        genderText = "𝐺𝑎𝑦🤷🏻‍♂️";
+        genderText = "𝐺𝑎𝑦 🤷🏻‍♂️";
     }
 
     const money = (await usersData.get(uid)).money;
@@ -85,15 +68,14 @@ module.exports = {
 ├‣ 𝑪𝒍𝒂𝒔𝒔: ${position ? position?.toUpperCase() : "𝙽𝚘𝚛𝚖𝚊𝚕 𝚄𝚜𝚎𝚛🥺"}
 ├‣ 𝑼𝒔𝒆𝒓𝒏𝒂𝒎𝒆: ${userInfo[uid].vanity ? userInfo[uid].vanity : "𝙽𝚘𝚗𝚎"}
 ├‣ 𝑷𝒓𝒐𝒇𝒊𝒍𝒆 𝑼𝒓𝒍: ${userInfo[uid].profileUrl}
-├‣ 𝑩𝒊𝒓𝒕𝒉𝒅𝒂𝒚: ${userInfo[uid].isBirthday !== false ? userInfo[uid].isBirthday : "𝙿𝚛𝚒𝚟𝚊𝚝𝚎"}
-├‣ 𝑵𝒊𝒄𝒌𝒏𝒂𝒎𝒆: ${userInfo[uid].alternateName || "𝙽𝚘𝚗𝚎"}
-╰‣ 𝑭𝒓𝒊𝒆𝒏𝒅 𝑾𝒊𝒕𝒉 𝑩𝒐𝒕: ${userInfo[uid].isFriend ? "𝚈𝚎𝚜✅" : "𝙽𝚘❎"}
+├‣ 𝑩𝒊𝒓𝒕𝒉𝒅𝒂𝒚: ${userInfo[uid].isBirthday !== false ? userInfo[uid].isBirthday : "𝑷𝒓𝒊𝒗𝒆𝒕𝒆"}
+├‣ 𝑵𝒊𝒄𝒌𝒏𝒂𝒎𝒆: ${userInfo[uid].alternateName || "𝑵𝒐𝒏𝒆"}
+╰‣ 𝑭𝒓𝒊𝒆𝒏𝒅 𝑾𝒊𝒕𝒉 𝑩𝒐𝒕: ${userInfo[uid].isFriend ? "𝒀𝒆𝒔✅" : "𝑵𝒐❎"}
 
 ╭─────[ 𝐔𝐒𝐄𝐑 𝐒𝐓𝐀𝐓𝐒 ]
-├‣ 𝑴𝒐𝒏𝒓𝒚: $${formatMoney(money)}
+├‣ 𝑴𝒐𝒏𝒆𝒚: $${formatMoney(money)}
 ├‣ 𝑹𝒂𝒏𝒌: #${rank}/${allUser.length}
-├‣ 𝑴𝒐𝒏𝒆𝒚 𝑹𝒂𝒏𝒌: #${moneyRank}/${allUser.length}
-╰‣ 𝑩𝒂𝒃𝒚 𝑻𝒆𝒂𝒄𝒉: ${babyTeach || 0}`;
+╰‣𝑴𝒐𝒏𝒆𝒚 𝑹𝒂𝒏𝒌: #${moneyRank}/${allUser.length}`;
 
     message.reply({
       body: userInformation,
