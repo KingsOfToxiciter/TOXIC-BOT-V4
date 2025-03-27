@@ -39,7 +39,7 @@ module.exports = {
             let tid;
             let color = "white"; //text color
             let bgColor;
-            let adminColor = "yellow";
+            let adminColor = "red";
             let memberColor = "cyan";
             let groupborderColor = "lime";
             let glow = false;
