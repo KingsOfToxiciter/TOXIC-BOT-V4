@@ -42,7 +42,7 @@ const onStart = async ({ api, args, event, usersData }) => {
             ID = event.senderID;
         }
 
-        const userName = await usersData.getName(ID);
+        const userName = await usersData.getName(ID) || "BOLOD";
         const text = args.join(" ") || "";
         await api.sendMessage({
             body: `${userName} ${text}`,
