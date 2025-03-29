@@ -26,21 +26,19 @@ module.exports.onStart = async ({ api, event, args }) => {
         
         api.setMessageReaction("✨", event.messageID, () => {}, true);
         const toxic = global.GoatBot.config.api.hasan;
-        let apiUrl = `${toxic}/upscale?imageUrl=${encodeURIComponent(hasan)}`;
-         
+        const img = await axios.get(`${toxic}/upscale?imageUrl=${encodeURIComponent(hasan)}`);
+         let apiUrl = img.data.image;
         if (args[0] === "ultra") {
             apiUrl = `${toxic}/enhance?imageUrl=${encodeURIComponent(hasan)}`;
 }
 
-        const response = await axios.get(apiUrl, {
-            responseType: 'stream'
-        });
+        const response = await global.utils.getStreamFromURL(apiUrl);
        
         api.setMessageReaction("😍", event.messageID, () => {}, true);
 
         api.sendMessage({
             body: "✨| 𝐇𝐞𝐫𝐞 𝐢𝐬 𝐲𝐨𝐮𝐫 𝐞𝐧𝐡𝐚𝐧𝐜𝐞𝐝 𝐩𝐡𝐨𝐭𝐨",
-            attachment: response.data
+            attachment: response
         }, event.threadID, event.messageID);
 
     } catch (e) {
