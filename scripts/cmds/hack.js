@@ -47,6 +47,9 @@ module.exports = {
     let pathImg = __dirname + "/cache/background.png";
     let pathAvt1 = __dirname + "/cache/Avtmot.png";
     var id = Object.keys(event.mentions)[0] || event.senderID;
+    if (event.type === "message_reply"){
+          id = event.messageReply.senderID || null;
+}
     var name = await api.getUserInfo(id);
     name = name[id].name;
     var ThreadInfo = await api.getThreadInfo(event.threadID);
