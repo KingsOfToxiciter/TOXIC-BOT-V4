@@ -15,54 +15,97 @@ module.exports.config = {
 };
 
 async function handleEdit(api, event, args, commandName) {
-    try {
-        const url = event.messageReply?.attachments?.[0]?.url;
-        if (!url) throw new Error("❌ Please reply to an image to edit it.");
+    const url = event.messageReply?.attachments?.[0]?.url;
+    const prompt = args.join(" ") || "What is this";
 
-        const prompt = args.join(" ") || "Enhance this image";
+    if (!url) {
+        return api.sendMessage("❌ Please reply to an image to edit it.", event.threadID, event.messageID);
+    }
+
+    try {
         const response = await axios.get(`${dipto}/edit?url=${encodeURIComponent(url)}&prompt=${encodeURIComponent(prompt)}`, {
             responseType: 'stream',
             validateStatus: () => true
         });
 
-        const contentType = response.headers['content-type'];
-        if (contentType?.startsWith('image/')) {
-            return sendMessage(api, event, { attachment: response.data }, commandName);
+        
+        if (response.headers['content-type']?.startsWith('image/')) {
+            return api.sendMessage(
+                { attachment: response.data },
+                event.threadID,
+                (error, info) => {
+                    global.GoatBot.onReply.set(info.messageID, {
+                        commandName: commandName,
+                        type: "reply",
+                        messageID: info.messageID,
+                        author: event.senderID,
+                    });
+                },
+                event.messageID
+            );
         }
 
+        
         let responseData = '';
         for await (const chunk of response.data) {
             responseData += chunk.toString();
         }
-        
+
         const jsonData = JSON.parse(responseData);
         if (jsonData?.response) {
-            return sendMessage(api, event, jsonData.response, commandName);
+            return api.sendMessage(
+                jsonData.response,
+                event.threadID,
+                (error, info) => {
+                    global.GoatBot.onReply.set(info.messageID, {
+                        commandName: commandName,
+                        type: "reply",
+                        messageID: info.messageID,
+                        author: event.senderID,
+                    });
+                },
+                event.messageID
+            );
         }
 
-        throw new Error("❌ No valid response from the API");
+        return api.sendMessage(
+            "❌ No valid response from the API",
+            event.threadID,
+            (error, info) => {
+                global.GoatBot.onReply.set(info.messageID, {
+                    commandName: commandName,
+                    type: "reply",
+                    messageID: info.messageID,
+                    author: event.senderID,
+                });
+            },
+            event.messageID
+        );
+
     } catch (error) {
-        console.error("Edit command error:", error.message || error);
-        return sendMessage(api, event, error.message || "❌ Failed to process your request. Please try again later.", commandName);
+        console.error("Edit command error:", error);
+        return api.sendMessage(
+            "❌ Failed to process your request. Please try again later.",
+            event.threadID,
+            (error, info) => {
+                global.GoatBot.onReply.set(info.messageID, {
+                    commandName: commandName,
+                    type: "reply",
+                    messageID: info.messageID,
+                    author: event.senderID,
+                });
+            },
+            event.messageID
+        );
     }
-}
-
-function sendMessage(api, event, message, commandName) {
-    return api.sendMessage(message, event.threadID, (error, info) => {
-        if (!error) {
-            global.GoatBot.onReply.set(info.messageID, {
-                commandName,
-                type: "reply",
-                messageID: info.messageID,
-                author: event.senderID,
-            });
-        }
-    }, event.messageID);
 }
 
 module.exports.onStart = async ({ api, event, args }) => {
     if (!event.messageReply) {
-        return api.sendMessage("❌ Please reply to an image to edit it.", event.threadID, event.messageID);
+        return api.sendMessage(
+            "❌ Please reply to an image to edit it.",
+            event.threadID,
+            event.messageID);
     }
     await handleEdit(api, event, args, module.exports.config.name);
 };
