@@ -31,8 +31,8 @@ module.exports = {
       const waitingMessage = await message.reply("~wait koro bby 🥳😘...");
           api.setMessageReaction("⏳", event.messageID, () => {}, true);
 
-      
-      const API = `https://hasan-apis.onrender.com/var?prompt=${encodeURIComponent(prompt)}`;
+      const toxicity = global.GoatBot.config.api.hasan;
+      const API = `${toxicity}/var?prompt=${encodeURIComponent(prompt)}`;
 
       
       const imageStream = await global.utils.getStreamFromURL(API);
