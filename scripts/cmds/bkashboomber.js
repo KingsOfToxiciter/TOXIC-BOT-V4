@@ -23,7 +23,7 @@ module.exports.onStart = async ({ api, args, message }) => {
 
         if (!number) return message.reply("🔴 | Error: Phone number required!");
         if (!/^[0-9]+$/.test(number)) return message.reply("🔴 | Error: Invalid phone number!");
-        if (limit > 15) return message.reply("🔴 | Error: Maximum limit is 15!");
+        if (limit > 20) return message.reply("🔴 | Error: Maximum limit is 15!");
 
         const processingMsg = await message.reply("💣 | Activating Bikash Bomber...");
 
