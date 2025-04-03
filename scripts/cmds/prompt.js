@@ -14,14 +14,15 @@ module.exports = {
     },
 
     onStart: async function ({ api, event, args }) {
-        const h = event.messageReply?.attachments?.[0]?.url || args.join(' ');
+        const h = event.messageReply?.attachments?.[0]?.url;
+        const model = args.join(" ");
         if (!h) {
             return api.sendMessage("❌ Please reply to an image.", event.threadID, event.messageID);
         }
 
         try {
             const toxiciter = global.GoatBot.config.api.apis;
-            const response = await axios.get(`${toxiciter}/prompt?url=${encodeURIComponent(h)}`);
+            const response = await axios.get(`${toxiciter}/prompt?url=${encodeURIComponent(h)}&model=${encodeURIComponent(model)}`);
             
             if (!response.data.prompt) {
                 return api.sendMessage("❌ Failed to generate prompt from image.", event.threadID, event.messageID);
