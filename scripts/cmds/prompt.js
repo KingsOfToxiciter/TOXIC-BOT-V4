@@ -15,7 +15,7 @@ module.exports = {
 
     onStart: async function ({ api, event, args }) {
         const h = event.messageReply?.attachments?.[0]?.url;
-        const model = args.join(" ");
+        const model = args.join(" ") || 1;
         if (!h) {
             return api.sendMessage("❌ Please reply to an image.", event.threadID, event.messageID);
         }
