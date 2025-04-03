@@ -19,9 +19,15 @@ module.exports = {
 
   onStart: async function ({ api, args, message, event }) {
     try {
-      const text = args.join(" ");
-      if (!text) {
-        return message.reply("Please provide a prompt.");
+      const imageUrl = event.messageReply?.attachments?.[0]?.url;
+      const toxic = global.GoatBot.config.api.apis;
+
+      const explain = await axios.get(`${toxic}/prompt?url=${imageUrl}&model=1`);
+
+      const text = explain.data.prompt;
+
+      if (!imageUrl) {
+        return message.reply("Please reply to an image");
       }
 
       let prompt = `Ghibli Art: ${text}`;
