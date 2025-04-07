@@ -6,34 +6,16 @@ module.exports = {
 		name: "adduser",
 		aliases:["add"],
 		version: "1.4",
-		author: "NTKhang",
+		author: "NTKhang", //updated by ♡︎ 𝐻𝐴𝑆𝐴𝑁 ♡︎
 		countDown: 5,
 		role: 1,
-		shortDescription: {
-			vi: "Thêm thành viên vào box chat",
-			en: "Add user to box chat"
-		},
-		longDescription: {
-			vi: "Thêm thành viên vào box chat của bạn",
-			en: "Add user to box chat of you"
-		},
+		shortDescription: "Add user to box chat",
+		longDescription: "Add user to box chat of you",
 		category: "box chat",
-		guide: {
-			en: "   {pn} [link profile | uid] (or reply to a message)"
-		}
+		guide: "{pn} [link profile | uid] (or reply to a message)"
 	},
 
 	langs: {
-		vi: {
-			alreadyInGroup: "Đã có trong nhóm",
-			successAdd: "- Đã thêm thành công %1 thành viên vào nhóm",
-			failedAdd: "- Không thể thêm %1 thành viên vào nhóm",
-			approve: "- Đã thêm %1 thành viên vào danh sách phê duyệt",
-			invalidLink: "Vui lòng nhập link facebook hợp lệ",
-			cannotGetUid: "Không thể lấy được uid của người dùng này",
-			linkNotExist: "Profile url này không tồn tại",
-			cannotAddUser: "Bot bị chặn tính năng hoặc người dùng này chặn người lạ thêm vào nhóm"
-		},
 		en: {
 			alreadyInGroup: "Already in group",
 			successAdd: "- Successfully added %1 members to the group",
@@ -50,10 +32,8 @@ module.exports = {
 		const { members, adminIDs, approvalMode } = await threadsData.get(event.threadID);
 		const botID = api.getCurrentUserID();
 
-		// যদি কেউ মেসেজ রিপ্লাই দিয়ে কমান্ড চালায়, তাহলে রিপ্লাই করা ইউজারের UID নেওয়া হবে
 		if (event.type == "message_reply") {
-			args = [event.messageReply.senderID]; // আগের আর্গুমেন্ট মুছে শুধুমাত্র রিপ্লাই করা ইউজারের UID নেওয়া হবে
-		}
+			args = [event.messageReply.senderID]; }
 
 		const success = [
 			{
@@ -116,8 +96,10 @@ module.exports = {
 
 			if (continueLoop == true)
 				continue;
+				const hasan = await api.getThreadInfo(event.threadID);
+				const user = hasan.userInfo;
 
-			if (members.some(m => m.userID == uid && m.inGroup)) {
+			if (user.some(m => m.id == uid)) {
 				checkErrorAndPush(getLang("alreadyInGroup"), item);
 			}
 			else {
